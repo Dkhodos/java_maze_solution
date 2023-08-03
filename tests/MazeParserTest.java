@@ -4,9 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.net.URL;
-
 public class MazeParserTest {
     MazeParser parser;
 
@@ -17,7 +14,7 @@ public class MazeParserTest {
 
     @Test
     public void testParseMaze() {
-        Maze maze = parser.parse(getTestFileAbsolutePath("test_data/maze_1.txt"));
+        Maze maze = parser.parse(getTestFileAbsolutePath("maze_1.txt"));
 
         assertEquals(10, maze.size());
 
@@ -30,21 +27,19 @@ public class MazeParserTest {
     @Test
     public void testEmptyFile() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            parser.parse(getTestFileAbsolutePath("test_data/empty_file.txt"));
+            parser.parse(getTestFileAbsolutePath("empty_file.txt"));
         });
     }
 
     @Test
     public void testSizeMissingFile() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            parser.parse(getTestFileAbsolutePath("test_data/maze_no_size.txt"));
+            parser.parse(getTestFileAbsolutePath("maze_no_size.txt"));
         });
     }
 
 
-    private String getTestFileAbsolutePath(String path){
-        URL resource = getClass().getClassLoader().getResource(path);
-        File file = new File(resource.getFile());
-        return file.getAbsolutePath();
+    private String getTestFileAbsolutePath(String fileName) {
+        return System.getProperty("user.dir") + "/tests/test_data/" + fileName;
     }
 }
