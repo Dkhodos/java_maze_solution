@@ -26,16 +26,12 @@ public class MazeParserTest {
 
     @Test
     public void testEmptyFile() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            parser.parse(getTestFileAbsolutePath("empty_file.txt"));
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parse(getTestFileAbsolutePath("empty_file.txt")));
     }
 
     @Test
     public void testSizeMissingFile() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            parser.parse(getTestFileAbsolutePath("maze_no_size.txt"));
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parse(getTestFileAbsolutePath("maze_no_size.txt")));
     }
 
 
