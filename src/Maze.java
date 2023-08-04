@@ -8,35 +8,38 @@ public record Maze(int size, Node[][] nodes) {
         int y = node.y();
 
         List<Node> neighbors = new ArrayList<>();
+        if(node.isObstacle()){
+            return neighbors;
+        }
 
-        if(!isOutOfBound(x+ 1, y)){
+        if(isInBound(x+ 1, y)){
             neighbors.add(nodes[x+ 1][y]);
         }
 
-        if(!isOutOfBound(node.x(), y + 1)){
+        if(isInBound(node.x(), y + 1)){
             neighbors.add(nodes[node.x()][y + 1]);
         }
 
-        if(!isOutOfBound(x- 1, y)){
+        if(isInBound(x- 1, y)){
             neighbors.add(nodes[x- 1][y]);
         }
 
-        if(!isOutOfBound(x, y - 1)){
+        if(isInBound(x, y - 1)){
             neighbors.add(nodes[x][y - 1]);
         }
 
         return neighbors;
     }
 
-    private boolean isOutOfBound(int x, int y){
+    private boolean isInBound(int x, int y){
         if(x < 0 || y < 0){
-            return true;
+            return false;
         }
 
-        if(y > size -1 || x >= size -1){
-            return true;
+        if(x > size - 1 || y > size - 1){
+            return false;
         }
 
-        return nodes[x][y].isObstacle();
+        return !(nodes[x][y].isObstacle());
     }
 }
