@@ -4,6 +4,8 @@ public abstract class SearchAlgorithm {
     protected Set<Node> visitedNodes;
     protected Frontier frontier;
 
+    protected HashMap<Node, Integer> costMap = new HashMap<>();
+
     public abstract double getPriority(Node node);
 
     public abstract List<Node> solve(Maze maze, Node start, Node goal);

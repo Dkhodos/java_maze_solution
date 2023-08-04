@@ -4,15 +4,17 @@ public class Main {
     private static final String RESULT_TEMPLATE = "%s (search %d nodes; path length %d): ";
 
     public static void main(String[] args) {
+        String file_path = System.getProperty("user.dir") + "/data/maze_1.txt";
+
         ReportMaker reportMaker = new ReportMaker();
 
-        if (args.length != 1) {
-            System.err.println("Usage: java Main <maze_file>");
-            System.exit(1);
-        }
+//        if (args.length != 1) {
+//            System.err.println("Usage: java Main <maze_file>");
+//            System.exit(1);
+//        }
 
         MazeParser parser = new MazeParser();
-        Maze maze = parser.parse(args[0]);
+        Maze maze = parser.parse(file_path);
         if (maze == null) {
             System.err.println("Error parsing maze file.");
             System.exit(1);
@@ -22,8 +24,8 @@ public class Main {
         Node goal = maze.nodes()[maze.size()-1][maze.size()-1]; // Assuming goal is at (n, n)
 
         SearchAlgorithm[] algorithms = new SearchAlgorithm[] {
-                new AStarSearch(),
-                new GreedySearch(),
+//                new AStarSearch(),
+//                new GreedySearch(),
                 new UniformCostSearch()
         };
 

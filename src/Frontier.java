@@ -19,4 +19,8 @@ public class Frontier {
     public boolean isEmpty() {
         return queue.isEmpty();
     }
+
+    public Node remove(){
+        return this.queue.remove();
+    }
 }
