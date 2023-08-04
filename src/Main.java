@@ -28,7 +28,7 @@ public class Main {
         SearchAlgorithm[] algorithms = new SearchAlgorithm[] {
 //                new AStarSearch(),
                 new GreedySearch(),
-//                new UniformCostSearch()
+                new UniformCostSearch()
         };
 
         for (SearchAlgorithm algorithm : algorithms) {

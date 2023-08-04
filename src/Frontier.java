@@ -20,7 +20,11 @@ public class Frontier {
         return queue.isEmpty();
     }
 
-    public Node remove(){
+    public Node dequeue(){
         return this.queue.remove();
+    }
+
+    public boolean remove(Node node){
+        return this.queue.remove(node);
     }
 }

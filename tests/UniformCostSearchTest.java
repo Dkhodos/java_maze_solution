@@ -50,6 +50,6 @@ class UniformCostSearchTest {
         assertEquals(19, path.size());
 
         // The number of visited nodes should also be 9
-        assertEquals(87, visitedNodes.size());
+        assertEquals(60, visitedNodes.size());
     }
 }
