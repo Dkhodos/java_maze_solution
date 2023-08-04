@@ -2,15 +2,19 @@ import java.util.*;
 
 public class AStarSearch extends SearchAlgorithm {
     @Override
-    public double getPriority(Node node) {
-        // Implement A* priority calculation logic
+    public double cost(Node node) {
         return 0;
     }
 
     @Override
-    public SearchAlgorithm.Solution solve(Maze maze, Node start, Node goal) {
+    public int heuristic(Node node) {
+        return 0;
+    }
+
+    @Override
+    public List<Node> solve(Maze maze, Node start, Node goal) {
         visitedNodes = new HashSet<>();
-        frontier = new Frontier(Comparator.comparing(this::getPriority));
+        frontier = new Frontier(Comparator.comparing(this::cost));
         // Implement A* search logic
         return null;
     }
