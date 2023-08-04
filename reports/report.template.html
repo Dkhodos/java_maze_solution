@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        h1{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .maze-node {
+            height: 40px;
+            width: 40px;
+            border: 1px solid black;
+
+            display: flex;
+            justify-content:center;
+            align-items: center;
+        }
+
+        .maze-node.start {
+            background: green;
+        }
+
+        .maze-node.end {
+            background: red;
+        }
+
+        .maze-node.solution {
+            background: aqua;
+        }
+
+
+        .maze-node.blocked {
+            background: black;
+        }
+
+         .maze {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <h1>Maze Report</h1>
+</div>
+<script>
+    var maze = JSON.parse(`{{maze}}`);
+    var solution = JSON.parse(`{{solution}}`);
+    var start = JSON.parse(`{{start}}`);
+    var end = JSON.parse(`{{end}}`);
+</script>
+<script>
+    function drawMaze(){
+        const mazeElement = document.createElement('div');
+        mazeElement.className = "maze";
+
+        for (let i = 0; i < maze.length; i++) {
+            for (let j = 0; j < maze[0].length; j++) {
+                mazeElement.appendChild(drawCell(maze[i][j]));
+            }
+        }
+
+        document.getElementById("root").appendChild(mazeElement);
+    }
+
+    function drawCell(node){
+        const nodeElement = document.createElement('div');
+        nodeElement.className = "maze-node";
+
+        nodeElement.dataset.x = node.x;
+        nodeElement.dataset.y = node.y;
+
+        if(node.isObstacle) nodeElement.classList.add("blocked");
+
+        if (node.x === start.x && node.y === start.y){
+            nodeElement.classList.add("start");
+            nodeElement.innerHTML = "S";
+        }
+
+        if (node.x === end.x && node.y === end.y){
+            nodeElement.classList.add("end");
+            nodeElement.innerHTML = "E";
+        }
+
+        return nodeElement;
+    }
+
+    function drawSolution(){
+        for (const node of solution){
+            const nodeElement = document.querySelector(`.maze-node[data-x="${node.x}"][data-y="${node.y}"]`);
+            if(nodeElement){
+                nodeElement.classList.add("solution");
+            }
+        }
+    }
+
+    drawMaze();
+    drawSolution();
+</script>
+</body>
+</html>

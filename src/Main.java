@@ -4,6 +4,8 @@ public class Main {
     private static final String RESULT_TEMPLATE = "%s (search %d nodes; path length %d): ";
 
     public static void main(String[] args) {
+        ReportMaker reportMaker = new ReportMaker();
+
         if (args.length != 1) {
             System.err.println("Usage: java Main <maze_file>");
             System.exit(1);
@@ -34,6 +36,7 @@ public class Main {
                     path.size()
             );
             algorithm.printPath(path);
+            reportMaker.createReport(start, goal, maze, path, algorithm.getClass().getSimpleName());
         }
     }
 }
