@@ -1,10 +1,11 @@
 import java.io.*;
 import java.nio.file.*;
 import java.util.List;
+
 public class ReportMaker {
     final static String reportTemplateFile = System.getProperty("user.dir") + "/reports/report.template.html";
 
-    public void createReport(Node start,Node end, Maze maze, List<Node> solution, String name) {
+    public void createReport(Node start,Node end, Maze maze, List<Node> solution, String name, int visitedNodes) {
         try {
             // Reading the template HTML
             String html = new String(Files.readAllBytes(Paths.get(reportTemplateFile)));
@@ -14,6 +15,7 @@ public class ReportMaker {
             html = html.replace("{{solution}}", stringifySolution(solution));
             html = html.replace("{{start}}", stringifyNode(start));
             html = html.replace("{{end}}", stringifyNode(end));
+            html = html.replace("{{visitedNodes}}", String.valueOf(visitedNodes));
 
             // Preparing the report directory
             String reportDirectory = System.getProperty("user.dir") + "/reports";

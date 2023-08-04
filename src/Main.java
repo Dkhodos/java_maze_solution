@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class Main {
     private static final String RESULT_TEMPLATE = "%s (search %d nodes; path length %d): ";
 
@@ -30,15 +28,15 @@ public class Main {
         };
 
         for (SearchAlgorithm algorithm : algorithms) {
-            List<Node> path = algorithm.solve(maze, start, goal);
+            SearchAlgorithm.Solution solution = algorithm.solve(maze, start, goal);
             System.out.printf(
                     RESULT_TEMPLATE,
                     algorithm.getClass().getSimpleName(),
-                    algorithm.visitedNodes.size(),
-                    path.size()
+                    solution.visitedNodes().size(),
+                    solution.path().size()
             );
-            algorithm.printPath(path);
-            reportMaker.createReport(start, goal, maze, path, algorithm.getClass().getSimpleName());
+            algorithm.printPath(solution.path());
+            reportMaker.createReport(start, goal, maze, solution.path(), algorithm.getClass().getSimpleName(), solution.visitedNodes().size());
         }
     }
 }

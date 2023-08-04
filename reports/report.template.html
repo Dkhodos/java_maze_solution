@@ -64,8 +64,10 @@
     var solution = JSON.parse(`{{solution}}`);
     var start = JSON.parse(`{{start}}`);
     var end = JSON.parse(`{{end}}`);
+    var visitedNodes = {{visitedNodes}};
 </script>
 <script>
+(async () => {
     function drawMaze(){
         const mazeElement = document.createElement('div');
         mazeElement.className = "maze";
@@ -114,8 +116,20 @@
         }
     }
 
+    function addCounts(){
+        const countsElement = document.createElement('div');
+        countsElement.className = "counts";
+
+        countsElement.innerHTML += `<p><strong>Path Length:</strong> ${solution.length}</p>`;
+        countsElement.innerHTML += `<p><strong>Visited Nodes Count:</strong> ${visitedNodes}</p>`;
+
+        document.getElementById("root").appendChild(countsElement);
+    }
+
     drawMaze();
+    addCounts();
     drawSolution();
+})();
 </script>
 </body>
 </html>

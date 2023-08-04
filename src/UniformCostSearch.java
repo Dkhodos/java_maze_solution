@@ -2,6 +2,7 @@ import java.util.*;
 
 
 public class UniformCostSearch extends SearchAlgorithm {
+
     @Override
     public double getPriority(Node node) {
         // In UCS, priority is the actual cost to reach the node
@@ -10,8 +11,9 @@ public class UniformCostSearch extends SearchAlgorithm {
     }
 
     @Override
-    public List<Node> solve(Maze maze, Node start, Node goal) {
+    public Solution solve(Maze maze, Node start, Node goal) {
         visitedNodes = new HashSet<>();
+        costMap = new HashMap<>();
         frontier = new Frontier(Comparator.comparing(this::getPriority));
 
         // Initialize the start node cost to 0 and add it to the costMap and the frontier
@@ -30,7 +32,8 @@ public class UniformCostSearch extends SearchAlgorithm {
 
             // If the goal is reached, reconstruct the path and return it
             if (current.equals(goal)) {
-                return reconstructPath(path, goal);
+                List<Node> solution = reconstructPath(path, goal);
+                return new Solution(visitedNodes, solution, costMap);
             }
 
             // Check all the non-obstacle neighbors of the current node
@@ -49,7 +52,7 @@ public class UniformCostSearch extends SearchAlgorithm {
             }
         }
         // If there is no solution, return an empty path
-        return new ArrayList<>();
+        return new Solution(visitedNodes, new ArrayList<>(), costMap);
     }
 
     private List<Node> reconstructPath(Map<Node, Node> path, Node goal) {

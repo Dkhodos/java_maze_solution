@@ -9,7 +9,7 @@ public class GreedySearch extends SearchAlgorithm {
     }
 
     @Override
-    public List<Node> solve(Maze maze, Node start, Node goal) {
+    public SearchAlgorithm.Solution solve(Maze maze, Node start, Node goal) {
         visitedNodes = new HashSet<>();
         frontier = new Frontier(Comparator.comparing(this::getPriority));
         // Implement Greedy search logic
