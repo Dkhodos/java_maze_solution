@@ -8,12 +8,12 @@ public class MazeTest {
         Node[][] nodes = new Node[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                nodes[i][j] = new Node(i, j, false); // fill the maze with non-obstacle nodes
+                nodes[i][j] = new Node(i, j, false, 0); // fill the maze with non-obstacle nodes
             }
         }
 
         // let's create an obstacle at (1,1)
-        nodes[1][1] = new Node(1, 1, true);
+        nodes[1][1] = new Node(1, 1, true, 0);
 
         Maze maze = new Maze(3, nodes);
 

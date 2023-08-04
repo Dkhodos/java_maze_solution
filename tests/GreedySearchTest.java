@@ -4,18 +4,19 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-class UniformCostSearchTest {
+class GreedySearchTest {
 
     private Maze maze;
     private Node start;
     private Node goal;
-    private UniformCostSearch ucs;
+    private GreedySearch greedy;
 
     @BeforeEach
     void setUp() {
-        ucs = new UniformCostSearch();
+        greedy = new GreedySearch();
 
         String filePath = System.getProperty("user.dir") + "/tests/test_data/maze_1.txt";
         maze = (new MazeParser()).parse(filePath);
@@ -27,15 +28,9 @@ class UniformCostSearchTest {
     }
 
     @Test
-    void testCost() {
-        // The cost of a node that is not visited yet should be Integer.MAX_VALUE
-        assertEquals(Integer.MAX_VALUE, ucs.cost(new Node(1, 1, false, 0)));
-    }
-
-    @Test
     void testSolve() {
-        List<Node> path = ucs.solve(maze, start, goal);
-        Set<Node> visitedNodes = ucs.getVisitedNodes();
+        List<Node> path = greedy.solve(maze, start, goal);
+        Set<Node> visitedNodes = greedy.getVisitedNodes();
 
         // The path should not be empty
         assertFalse(path.isEmpty());
@@ -50,6 +45,6 @@ class UniformCostSearchTest {
         assertEquals(19, path.size());
 
         // The number of visited nodes should also be 9
-        assertEquals(87, visitedNodes.size());
+        assertEquals(19, visitedNodes.size());
     }
 }

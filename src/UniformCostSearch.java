@@ -4,16 +4,6 @@ import java.util.*;
 public class UniformCostSearch extends SearchAlgorithm {
 
     @Override
-    public double cost(Node node) {
-        return this.costMap.getOrDefault(node, Integer.MAX_VALUE);
-    }
-
-    @Override
-    public int heuristic(Node node) {
-        return 0;
-    }
-
-    @Override
     public List<Node> solve(Maze maze, Node start, Node goal) {
         frontier = new Frontier(Comparator.comparing(this::cost));
 

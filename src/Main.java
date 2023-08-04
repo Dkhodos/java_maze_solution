@@ -23,10 +23,12 @@ public class Main {
         Node start = maze.nodes()[0][0]; // Assuming start is at (0, 0)
         Node goal = maze.nodes()[maze.size()-1][maze.size()-1]; // Assuming goal is at (n, n)
 
+        maze.setHeuristicDistance(goal);
+
         SearchAlgorithm[] algorithms = new SearchAlgorithm[] {
 //                new AStarSearch(),
-//                new GreedySearch(),
-                new UniformCostSearch()
+                new GreedySearch(),
+//                new UniformCostSearch()
         };
 
         for (SearchAlgorithm algorithm : algorithms) {

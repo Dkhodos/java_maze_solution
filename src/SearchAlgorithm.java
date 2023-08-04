@@ -4,9 +4,9 @@ public abstract class SearchAlgorithm {
     protected Set<Node> visitedNodes = new HashSet<>();
     protected HashMap<Node, Integer> costMap = new HashMap<>();
 
-    public abstract double cost(Node node);
-
-    public abstract int heuristic(Node node);
+    protected double cost(Node node) {
+        return this.costMap.getOrDefault(node, Integer.MAX_VALUE);
+    }
 
     public abstract List<Node> solve(Maze maze, Node start, Node goal);
 
