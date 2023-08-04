@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 class GreedySearchTest {
 
@@ -17,6 +16,20 @@ class GreedySearchTest {
     @BeforeEach
     void setUp() {
         greedy = new GreedySearch();
+    }
+
+    @Test
+    void testSolveUnsolvableMaze() {
+        initMazeFromFile("maze_no_solution.txt");
+
+        List<Node> path = greedy.solve(maze, start, goal);
+        Set<Node> visitedNodes = greedy.getVisitedNodes();
+
+        // The path should not be empty
+        assertTrue(path.isEmpty());
+
+        // The number of visited nodes should also be 9
+        assertEquals(83, visitedNodes.size());
     }
 
     @Test
