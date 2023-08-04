@@ -29,6 +29,7 @@
             display: flex;
             justify-content:center;
             align-items: center;
+            transition: .2s all ease-in-out;
         }
 
         .maze-node.start {
@@ -101,10 +102,14 @@
     }
 
     function drawSolution(){
+        let delay = 300;
         for (const node of solution){
             const nodeElement = document.querySelector(`.maze-node[data-x="${node.x}"][data-y="${node.y}"]`);
             if(nodeElement){
-                nodeElement.classList.add("solution");
+                window.setTimeout(() => {
+                   nodeElement.classList.add("solution");
+                },delay);
+                delay += 300;
             }
         }
     }
