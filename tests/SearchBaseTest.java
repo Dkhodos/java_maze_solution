@@ -24,7 +24,7 @@ public abstract class SearchBaseTest {
         assertFalse(path.isEmpty());
         assertEquals(start, path.get(0));
         assertEquals(goal, path.get(path.size() - 1));
-        assertEquals(expectedPathSize, path.size());
-        assertEquals(expectedVisitedNodesSize, visitedNodes.size());
+        assertEquals(expectedPathSize, path.size(), "Unexpected path size");
+        assertEquals(expectedVisitedNodesSize, visitedNodes.size(), "Unexpected visited size");
     }
 }

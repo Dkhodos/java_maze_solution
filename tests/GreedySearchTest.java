@@ -29,11 +29,8 @@ class GreedySearchTest extends SearchBaseTest{
         List<Node> path = greedy.solve(maze, start, goal);
         Set<Node> visitedNodes = greedy.getVisitedNodes();
 
-        // The path should not be empty
         assertTrue(path.isEmpty());
-
-        // The number of visited nodes should also be 9
-        assertEquals(83, visitedNodes.size());
+        assertEquals(76, visitedNodes.size());
     }
 
     @Test
@@ -53,6 +50,6 @@ class GreedySearchTest extends SearchBaseTest{
         List<Node> path = greedy.solve(maze, start, goal);
         Set<Node> visitedNodes = greedy.getVisitedNodes();
 
-        validateSearchResults(path, visitedNodes, 367, 1557);
+        validateSearchResults(path, visitedNodes, 397, 1329);
     }
 }

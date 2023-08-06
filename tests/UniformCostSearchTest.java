@@ -39,10 +39,7 @@ class UniformCostSearchTest extends SearchBaseTest{
         List<Node> path = ucs.solve(maze, start, goal);
         Set<Node> visitedNodes = ucs.getVisitedNodes();
 
-        // The path should not be empty
         assertTrue(path.isEmpty());
-
-        // The number of visited nodes should also be 9
         assertEquals(58, visitedNodes.size());
     }
 

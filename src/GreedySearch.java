@@ -13,17 +13,18 @@ public class GreedySearch extends SearchAlgorithm {
 
         while (!frontier.isEmpty()) {
             Node current = frontier.removeHighestPriorityNode();
-            visitedNodes.add(current);
 
             if (current.equals(goal)) { // If the goal is reached, reconstruct the path and return it.
+                visitedNodes.add(current);
                 return reconstructPath(path, goal);
             }
 
             for (Node neighbor : maze.getNeighbors(current)) {
-                if (!visitedNodes.contains(neighbor) && !frontier.contains(neighbor)) {
+                if (!visitedNodes.contains(neighbor)) {
                     frontier.add(neighbor);
                     this.costMap.put(neighbor, this.costMap.get(current) + 1);
                     path.put(neighbor, current); // Keep track of the parent node.
+                    visitedNodes.add(current);
                 }
             }
         }
