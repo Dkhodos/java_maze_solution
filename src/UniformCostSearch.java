@@ -46,16 +46,4 @@ public class UniformCostSearch extends SearchAlgorithm {
         // If there is no solution, return an empty path
         return new ArrayList<>();
     }
-
-
-    private List<Node> reconstructPath(Map<Node, Node> path, Node goal) {
-        List<Node> result = new ArrayList<>();
-        Node node = goal;
-        while (node != null) {
-            result.add(node);
-            node = path.get(node);
-        }
-        Collections.reverse(result);
-        return result;
-    }
 }

@@ -18,4 +18,15 @@ public abstract class SearchAlgorithm {
     public Set<Node> getVisitedNodes() {
         return visitedNodes;
     }
+
+    protected List<Node> reconstructPath(Map<Node, Node> path, Node goal) {
+        List<Node> result = new ArrayList<>();
+        Node node = goal;
+        while (node != null) {
+            result.add(node);
+            node = path.get(node);
+        }
+        Collections.reverse(result);
+        return result;
+    }
 }

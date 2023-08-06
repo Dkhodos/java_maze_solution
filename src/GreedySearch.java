@@ -1,43 +1,32 @@
 import java.util.*;
-import java.util.stream.Stream;
-
 
 public class GreedySearch extends SearchAlgorithm {
     @Override
     public List<Node> solve(Maze maze, Node start, Node goal) {
         visitedNodes = new HashSet<>();
-        frontier = new Frontier(this::compare);
+        frontier = new Frontier(Comparator.comparing(Node::getHeuristicDistance));
 
         frontier.add(start);
         this.costMap.put(start, 0);
+
+        Map<Node, Node> path = new HashMap<>(); // This map will help us reconstruct the path.
 
         while (!frontier.isEmpty()) {
             Node current = frontier.removeHighestPriorityNode();
             visitedNodes.add(current);
 
+            if (current.equals(goal)) { // If the goal is reached, reconstruct the path and return it.
+                return reconstructPath(path, goal);
+            }
+
             for (Node neighbor : maze.getNeighbors(current)) {
-                if (!visitedNodes.contains(neighbor)) {
+                if (!visitedNodes.contains(neighbor) && !frontier.contains(neighbor)) {
                     frontier.add(neighbor);
                     this.costMap.put(neighbor, this.costMap.get(current) + 1);
-
-                    if (neighbor == goal) {
-                        visitedNodes.add(neighbor);
-                        return reconstructPath(visitedNodes);
-                    }
+                    path.put(neighbor, current); // Keep track of the parent node.
                 }
             }
         }
         return new ArrayList<>();
-    }
-
-    private List<Node> reconstructPath(Set<Node> path) {
-        Node[] pathAsArray = new Node[path.size()];
-        path.toArray(pathAsArray);
-
-        return Arrays.stream(pathAsArray).sorted((Node n1, Node n2) -> -this.compare(n1, n2)).toList();
-    }
-
-    private int compare(Node n1, Node n2){
-        return n1.getHeuristicDistance() - n2.getHeuristicDistance(); // returns -1 if p1 < p2, 0 if p1 == p2, and 1 if p1 > p2
     }
 }

@@ -1,30 +1,45 @@
-import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class Frontier {
-    private PriorityQueue<Node> queue;
+    private final PriorityQueue<Node> queue;
+    private final Set<Node> nodeSet;
 
     public Frontier(Comparator<Node> comparator) {
         this.queue = new PriorityQueue<>(comparator);
+        this.nodeSet = new HashSet<>();
     }
 
     public void add(Node node) {
         queue.add(node);
+        nodeSet.add(node);
     }
 
     public Node removeHighestPriorityNode() {
-        return queue.poll();
+        Node node = queue.poll();
+        if (node != null) {
+            nodeSet.remove(node);
+        }
+        return node;
     }
 
     public boolean isEmpty() {
         return queue.isEmpty();
     }
 
-    public Node dequeue(){
-        return this.queue.remove();
+    public boolean contains(Node node) {
+        return nodeSet.contains(node);
     }
 
-    public boolean remove(Node node){
-        return this.queue.remove(node);
+    public Node dequeue() {
+        Node node = queue.remove();
+        if (node != null) {
+            nodeSet.remove(node);
+        }
+        return node;
+    }
+
+    public void remove(Node node) {
+        nodeSet.remove(node);
+        queue.remove(node);
     }
 }

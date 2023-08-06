@@ -58,9 +58,6 @@ public class MazeGenerator {
         String fullPath = rootDir + "/data/maze.generated.txt";
         File file = new File(fullPath);
 
-        // Create directory if it does not exist.
-        file.getParentFile().mkdirs();
-
         try (PrintWriter writer = new PrintWriter(file)) {
             writer.println(size); // Writes the size at the beginning
             for (int i = 0; i < size; i++) {
@@ -76,7 +73,7 @@ public class MazeGenerator {
     }
 
     public static void main(String[] args) {
-        MazeGenerator generator = new MazeGenerator(100, Difficulty.Medium);
+        MazeGenerator generator = new MazeGenerator(30, Difficulty.Easy);
         generator.generate();
     }
 }

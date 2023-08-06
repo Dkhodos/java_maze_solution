@@ -4,6 +4,7 @@ public class Main {
     private static final String RESULT_TEMPLATE = "%s (search %d nodes; path length %d): ";
 
     public static void main(String[] args) {
+        Logger logger = new Logger("Main Class");
         String file_path = System.getProperty("user.dir") + "/data/maze_1.txt";
 
         ReportMaker reportMaker = new ReportMaker();
@@ -16,7 +17,7 @@ public class Main {
         MazeParser parser = new MazeParser();
         Maze maze = parser.parse(file_path);
         if (maze == null) {
-            System.err.println("Error parsing maze file.");
+            logger.error("Error parsing maze file.");
             System.exit(1);
         }
 
@@ -26,12 +27,14 @@ public class Main {
         maze.setHeuristicDistance(goal);
 
         SearchAlgorithm[] algorithms = new SearchAlgorithm[] {
-//                new AStarSearch(),
+                new AStarSearch(),
                 new GreedySearch(),
                 new UniformCostSearch()
         };
 
         for (SearchAlgorithm algorithm : algorithms) {
+            logger.info(algorithm.getClass().getSimpleName());
+
             List<Node> path = algorithm.solve(maze, start, goal);
             System.out.printf(
                     RESULT_TEMPLATE,
@@ -39,6 +42,7 @@ public class Main {
                     algorithm.getVisitedNodes().size(),
                     path.size()
             );
+
             algorithm.printPath(path);
             reportMaker.createReport(start, goal, maze, path, algorithm.getClass().getSimpleName(), algorithm.getVisitedNodes().size());
         }

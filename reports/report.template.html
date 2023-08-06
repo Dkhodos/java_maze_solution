@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Maze Report: {{className}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         html {
             height: 100%;
@@ -15,6 +18,10 @@
             height: 100%;
         }
 
+        body * {
+            font-family: 'Assistant', sans-serif;
+        }
+
         h1{
             display: flex;
             justify-content: center;
@@ -22,8 +29,6 @@
         }
 
         .maze-node {
-            height: 40px;
-            width: 40px;
             border: 1px solid black;
 
             display: flex;
@@ -56,7 +61,7 @@
 </head>
 <body>
 <div id="root">
-    <h1>Maze Report</h1>
+    <h1>Maze Report: {{className}}</h1>
 </div>
 <script>
     var maze = JSON.parse(`{{maze}}`);
@@ -93,13 +98,20 @@
 
         if (node.x === start.x && node.y === start.y){
             nodeElement.classList.add("start");
-            nodeElement.innerHTML = "S";
+            nodeElement.innerHTML = "<strong class='point'>S</strong>";
         }
 
         if (node.x === end.x && node.y === end.y){
             nodeElement.classList.add("end");
-            nodeElement.innerHTML = "E";
+            nodeElement.innerHTML = "<strong class='point'>E</strong>";
         }
+
+        let size = 40;
+        if(maze.length > 20) size -= 20;
+        if(maze.length > 50) size -= 10;
+        if(maze.length > 80) size -= 5;
+
+        nodeElement.style = `height:${size}px;width:${size}px`
 
         return nodeElement;
     }

@@ -16,13 +16,10 @@ public class ReportMaker {
             html = html.replace("{{start}}", stringifyNode(start));
             html = html.replace("{{end}}", stringifyNode(end));
             html = html.replace("{{visitedNodes}}", String.valueOf(visitedNodes));
+            html = html.replace("{{className}}", name);
 
             // Preparing the report directory
             String reportDirectory = System.getProperty("user.dir") + "/reports";
-            File reportDir = new File(reportDirectory);
-            if (!reportDir.exists()) {
-                reportDir.mkdirs();
-            }
 
             // Create the new report file with the incremented count
             String reportFile = reportDirectory + "/report" + "." + name + ".html";
