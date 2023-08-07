@@ -4,6 +4,8 @@ import java.util.List;
 
 public class ReportMaker {
     final static String reportTemplateFile = System.getProperty("user.dir") + "/reports/report.template.html";
+    final static String JavaScriptNodeTemplate = "{\"x\": %d, \"y\": %d, \"isObstacle\": %s}";
+    final static Logger logger = new Logger("ReportMaker");
 
     public void createReport(Node start,Node end, Maze maze, List<Node> solution, String name, int visitedNodes) {
         try {
@@ -25,9 +27,9 @@ public class ReportMaker {
             String reportFile = reportDirectory + "/report" + "." + name + ".html";
             Files.write(Paths.get(reportFile), html.getBytes());
 
-            System.out.println("Report written to " + reportFile);
+            logger.info("Report written to " + reportFile);
         } catch(IOException e) {
-            System.out.println("Error creating report: " + e.getMessage());
+            logger.error("Error creating report: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -64,6 +66,6 @@ public class ReportMaker {
     }
 
     private String stringifyNode(Node node) {
-        return String.format("{\"x\": %d, \"y\": %d, \"isObstacle\": %s}", node.getX(), node.getY(), node.isObstacle());
+        return String.format(JavaScriptNodeTemplate, node.getX(), node.getY(), node.isObstacle());
     }
 }

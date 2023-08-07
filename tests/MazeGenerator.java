@@ -37,8 +37,8 @@ public class MazeGenerator {
             Maze maze = new Maze(size, nodes);
             maze.setHeuristicDistance(nodes[size-1][size-1]);
 
-            List<Node> path = uch.solve(maze, maze.nodes()[0][0], maze.nodes()[size-1][size-1]);
-            if(!path.isEmpty()) {
+            SearchResult result = uch.solve(maze, maze.nodes()[0][0], maze.nodes()[size-1][size-1]);
+            if(!result.path().isEmpty()) {
                 toFile(maze);
                 return;
             }

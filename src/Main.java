@@ -1,14 +1,10 @@
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
-    private static final String RESULT_TEMPLATE = "%s (search %d nodes; path length %d): ";
-
     public static void main(String[] args) {
         Logger logger = new Logger("Main Class");
         String file_path = System.getProperty("user.dir") + "/data/maze_1.txt";
-
-        ReportMaker reportMaker = new ReportMaker();
-
 //        if (args.length != 1) {
 //            System.err.println("Usage: java Main <maze_file>");
 //            System.exit(1);
@@ -26,25 +22,13 @@ public class Main {
 
         maze.setHeuristicDistance(goal);
 
-        SearchAlgorithm[] algorithms = new SearchAlgorithm[] {
+        List<SearchAlgorithm> algorithmsList = Arrays.asList(
                 new AStarSearch(),
                 new GreedySearch(),
                 new UniformCostSearch()
-        };
+        );
 
-        for (SearchAlgorithm algorithm : algorithms) {
-            logger.info(algorithm.getClass().getSimpleName());
-
-            List<Node> path = algorithm.solve(maze, start, goal);
-            System.out.printf(
-                    RESULT_TEMPLATE,
-                    algorithm.getClass().getSimpleName(),
-                    algorithm.getVisitedNodes().size(),
-                    path.size()
-            );
-
-            algorithm.printPath(path);
-            reportMaker.createReport(start, goal, maze, path, algorithm.getClass().getSimpleName(), algorithm.getVisitedNodes().size());
-        }
+        SearchExecutor executor = new SearchExecutor(algorithmsList);
+        executor.executeSearchAndGenerateReports(maze, start, goal);
     }
 }

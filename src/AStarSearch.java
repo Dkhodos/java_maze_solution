@@ -1,12 +1,14 @@
 import java.util.*;
 
 public class AStarSearch extends SearchAlgorithm {
-    @Override
-    public List<Node> solve(Maze maze, Node start, Node goal) {
-        // Add the heuristic cost to the comparator
-        frontier = new Frontier(Comparator.comparing(node -> this.cost(node) + node.getHeuristicDistance()));
 
-        this.costMap.put(start, 0);
+    @Override
+    public SearchResult solve(Maze maze, Node start, Node goal) {
+        Map<Node, Integer> costMap = new HashMap<>();
+        Set<Node> visitedNodes = new HashSet<>();
+        Frontier frontier = new Frontier(Comparator.comparing(node -> cost(node, costMap) + node.getHeuristicDistance()));
+
+        costMap.put(start, 0);
         maze.setHeuristicDistance(goal);  // Set the heuristic distance for all nodes
         frontier.add(start);
 
@@ -16,7 +18,8 @@ public class AStarSearch extends SearchAlgorithm {
             Node current = frontier.dequeue();
 
             if (current.equals(goal)) {
-                return reconstructPath(path, goal);
+                List<Node> finalPath = reconstructPath(path, goal);
+                return new SearchResult(finalPath, visitedNodes);
             }
 
             for (Node neighbor : maze.getNeighbors(current)) {
@@ -24,17 +27,16 @@ public class AStarSearch extends SearchAlgorithm {
                     continue;
                 }
 
-                int tentativeCost = this.costMap.get(current) + 1;
-                if (tentativeCost < this.costMap.getOrDefault(neighbor, Integer.MAX_VALUE)) {
+                int tentativeCost = costMap.get(current) + 1;
+                if (tentativeCost < cost(neighbor, costMap)) {
                     visitedNodes.add(current);
-
-                    this.costMap.put(neighbor, tentativeCost);
+                    costMap.put(neighbor, tentativeCost);
                     path.put(neighbor, current);
                     frontier.remove(neighbor);
                     frontier.add(neighbor);
                 }
             }
         }
-        return new ArrayList<>();
+        return new SearchResult(new ArrayList<>(), visitedNodes);
     }
 }

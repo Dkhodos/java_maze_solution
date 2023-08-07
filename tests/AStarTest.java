@@ -1,9 +1,5 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class AStarTest extends SearchBaseTest{
@@ -15,40 +11,30 @@ class AStarTest extends SearchBaseTest{
     }
 
     @Test
-    void testCost() {
-        initMazeFromFile("maze_1.txt");
-
-        assertEquals(Integer.MAX_VALUE, aStar.cost(new Node(1, 1, false, 0)));
-    }
-
-    @Test
     void testSolve() {
         initMazeFromFile("maze_1.txt");
 
-        List<Node> path = aStar.solve(maze, start, goal);
-        Set<Node> visitedNodes = aStar.getVisitedNodes();
+        SearchResult result = aStar.solve(maze, start, goal);
 
-        validateSearchResults(path, visitedNodes, 19, 49);
+        validateSearchResults(result.path(), result.visitedNodes(), 19, 49);
     }
 
     @Test
     void testSolveUnsolvableMaze() {
         initMazeFromFile("maze_no_solution.txt");
 
-        List<Node> path = aStar.solve(maze, start, goal);
-        Set<Node> visitedNodes = aStar.getVisitedNodes();
+        SearchResult result = aStar.solve(maze, start, goal);
 
-        assertTrue(path.isEmpty());
-        assertEquals(63, visitedNodes.size());
+        assertTrue(result.path().isEmpty());
+        assertEquals(63, result.visitedNodes().size());
     }
 
     @Test
     void testSolveBigMaze() {
         initMazeFromFile("big_maze.txt");
 
-        List<Node> path = aStar.solve(maze, start, goal);
-        Set<Node> visitedNodes = aStar.getVisitedNodes();
+        SearchResult result = aStar.solve(maze, start, goal);
 
-        validateSearchResults(path, visitedNodes, 301, 1836);
+        validateSearchResults(result.path(), result.visitedNodes(), 301, 1836);
     }
 }
