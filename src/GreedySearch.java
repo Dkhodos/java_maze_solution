@@ -35,8 +35,4 @@ public class GreedySearch extends SearchAlgorithm {
         }
         return new SearchResult(new ArrayList<>(), visitedNodes);
     }
-
-    private int getHeuristicDistance(Node node, Node goal){
-        return (Math.abs(node.x() - goal.x()) + Math.abs(node.y() - goal.y()));
-    }
 }

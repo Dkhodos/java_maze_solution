@@ -6,7 +6,7 @@ public class UniformCostSearch extends SearchAlgorithm {
     @Override
     public SearchResult solve(Maze maze, Node start, Node goal) {
         Map<Node, Integer> costMap = new HashMap<>();
-        Frontier frontier = new Frontier(Comparator.comparing(node -> this.cost(node, costMap)));
+        Frontier frontier = new Frontier(Comparator.comparing(node -> this.getCost(node, costMap)));
         Set<Node> visitedNodes = new HashSet<>();
 
         costMap.put(start, 0);
@@ -29,7 +29,7 @@ public class UniformCostSearch extends SearchAlgorithm {
                 }
 
                 int tentativeCost = costMap.get(current) + 1;
-                if (tentativeCost < cost(neighbor, costMap)) {
+                if (tentativeCost < getCost(neighbor, costMap)) {
                     visitedNodes.add(current);
                     costMap.put(neighbor, tentativeCost);
                     path.put(neighbor, current);

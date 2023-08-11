@@ -28,7 +28,7 @@ public class AStarSearch extends SearchAlgorithm {
                 }
 
                 int tentativeCost = costMap.get(current) + 1;
-                if (tentativeCost < cost(neighbor, costMap)) {
+                if (tentativeCost < getCost(neighbor, costMap)) {
                     visitedNodes.add(current);
                     costMap.put(neighbor, tentativeCost);
                     path.put(neighbor, current);
@@ -37,9 +37,5 @@ public class AStarSearch extends SearchAlgorithm {
             }
         }
         return new SearchResult(new ArrayList<>(), visitedNodes);
-    }
-
-    private int getHeuristicDistance(Node node, Node goal){
-        return (Math.abs(node.x() - goal.x()) + Math.abs(node.y() - goal.y()));
     }
 }
