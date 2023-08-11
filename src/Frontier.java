@@ -27,4 +27,9 @@ public class Frontier {
     public void remove(Node node){
         this.queue.remove(node);
     }
+
+    public void update(Node node){
+        this.remove(node);
+        this.add(node);
+    }
 }

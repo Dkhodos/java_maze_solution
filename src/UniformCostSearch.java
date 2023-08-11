@@ -33,8 +33,7 @@ public class UniformCostSearch extends SearchAlgorithm {
                     visitedNodes.add(current);
                     costMap.put(neighbor, tentativeCost);
                     path.put(neighbor, current);
-                    frontier.remove(neighbor);
-                    frontier.add(neighbor);
+                    frontier.update(neighbor);
                 }
             }
         }
