@@ -3,7 +3,7 @@ public abstract class SearchAlgorithm {
 
     public abstract SearchResult solve(Maze maze, Node start, Node goal);
 
-    protected double cost(Node node, Map<Node, Integer> costMap) {
+    protected int cost(Node node, Map<Node, Integer> costMap) {
         return costMap.getOrDefault(node, Integer.MAX_VALUE);
     }
 
