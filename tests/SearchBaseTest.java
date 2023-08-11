@@ -15,8 +15,6 @@ public abstract class SearchBaseTest {
 
         start = maze.nodes()[0][0]; // Assuming start is at (0, 0)
         goal = maze.nodes()[maze.size()-1][maze.size()-1]; // Assuming goal is at (n, n)
-
-        maze.setHeuristicDistance(goal);
     }
 
     protected void validateSearchResults(List<Node> path, Set<Node> visitedNodes, int expectedPathSize,

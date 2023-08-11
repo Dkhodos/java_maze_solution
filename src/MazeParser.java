@@ -40,7 +40,7 @@ class MazeParser {
                 throw new IllegalArgumentException("Incorrect number of columns in row " + x);
             }
             for (int y = 0; y < size; y++) {
-                nodes[x][y] = new Node(x, y, OBSTACLE.equals(line[y].trim()), 0);
+                nodes[x][y] = new Node(x, y, OBSTACLE.equals(line[y].trim()));
             }
         }
         return nodes;

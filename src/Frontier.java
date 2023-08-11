@@ -12,7 +12,7 @@ public class Frontier {
         queue.add(node);
     }
 
-    public Node removeHighestPriorityNode() {
+    public Node poll() {
         return queue.poll();
     }
 

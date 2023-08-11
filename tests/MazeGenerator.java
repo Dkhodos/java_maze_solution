@@ -30,12 +30,11 @@ public class MazeGenerator {
                     if(i == 0 && j == 0) isObstacle = false;
                     if(i == size-1 && j == size-1) isObstacle = false;
 
-                    nodes[i][j] = new Node(i, j, isObstacle, 0);
+                    nodes[i][j] = new Node(i, j, isObstacle);
                 }
             }
 
             Maze maze = new Maze(size, nodes);
-            maze.setHeuristicDistance(nodes[size-1][size-1]);
 
             SearchResult result = uch.solve(maze, maze.nodes()[0][0], maze.nodes()[size-1][size-1]);
             if(!result.path().isEmpty()) {

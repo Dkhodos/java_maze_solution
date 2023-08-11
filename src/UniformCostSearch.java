@@ -18,6 +18,7 @@ public class UniformCostSearch extends SearchAlgorithm {
             Node current = frontier.dequeue();
 
             if (current.equals(goal)) {
+                visitedNodes.add(current);
                 List<Node> finalPath = reconstructPath(path, goal);
                 return new SearchResult(finalPath, visitedNodes);
             }

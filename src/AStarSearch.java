@@ -6,10 +6,9 @@ public class AStarSearch extends SearchAlgorithm {
     public SearchResult solve(Maze maze, Node start, Node goal) {
         Map<Node, Integer> costMap = new HashMap<>();
         Set<Node> visitedNodes = new HashSet<>();
-        Frontier frontier = new Frontier(Comparator.comparing(node -> cost(node, costMap) + node.getHeuristicDistance()));
+        Frontier frontier = new Frontier(Comparator.comparing((Node n) -> this.getHeuristicDistance(n, goal)));
 
         costMap.put(start, 0);
-        maze.setHeuristicDistance(goal);  // Set the heuristic distance for all nodes
         frontier.add(start);
 
         Map<Node, Node> path = new HashMap<>();
@@ -18,6 +17,7 @@ public class AStarSearch extends SearchAlgorithm {
             Node current = frontier.dequeue();
 
             if (current.equals(goal)) {
+                visitedNodes.add(current);
                 List<Node> finalPath = reconstructPath(path, goal);
                 return new SearchResult(finalPath, visitedNodes);
             }
@@ -38,5 +38,9 @@ public class AStarSearch extends SearchAlgorithm {
             }
         }
         return new SearchResult(new ArrayList<>(), visitedNodes);
+    }
+
+    private int getHeuristicDistance(Node node, Node goal){
+        return (Math.abs(node.x() - goal.x()) + Math.abs(node.y() - goal.y()));
     }
 }

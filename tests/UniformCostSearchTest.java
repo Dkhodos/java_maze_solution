@@ -17,7 +17,7 @@ class UniformCostSearchTest extends SearchBaseTest{
 
         SearchResult result = ucs.solve(maze, start, goal);
 
-        validateSearchResults(result.path(), result.visitedNodes(), 19, 60);
+        validateSearchResults(result.path(), result.visitedNodes(), 19, 61);
     }
 
     @Test
@@ -36,6 +36,6 @@ class UniformCostSearchTest extends SearchBaseTest{
 
         SearchResult result = ucs.solve(maze, start, goal);
 
-        validateSearchResults(result.path(), result.visitedNodes(), 301, 2792);
+        validateSearchResults(result.path(), result.visitedNodes(), 301, 2793);
     }
 }

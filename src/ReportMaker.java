@@ -66,6 +66,6 @@ public class ReportMaker {
     }
 
     private String stringifyNode(Node node) {
-        return String.format(JavaScriptNodeTemplate, node.getX(), node.getY(), node.isObstacle());
+        return String.format(JavaScriptNodeTemplate, node.x(), node.y(), node.isObstacle());
     }
 }
