@@ -1,3 +1,4 @@
+
 # Maze Solver
 
 This project provides a set of search algorithms to solve a maze. The maze is represented as a grid, where each cell can either be a walkable path or an obstacle. The goal is to find a path from a starting point to an end point.
@@ -5,9 +6,9 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 ## Features
 
 - **Search Algorithms**: The project includes multiple search algorithms:
-  - A* Search
-  - Greedy Search
-  - Uniform Cost Search
+- A* Search
+- Greedy Search
+- Uniform Cost Search
 - **Maze Parser**: Parses a maze from a file.
 - **Report Generation**: Generates an HTML report based on a given solution path through the maze.
 - **Search Executor**: Executes a list of search algorithms on a given maze, logs the execution time, displays the results, and generates a report for each algorithm.
@@ -30,11 +31,35 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 
 ## Usage
 
-- placeholder
+- { placeholder }
 
-## Testing
+## Tests
+- **AStarTest**:
+  - `testSolve`: Checks if the A* algorithm can solve a basic maze.
+  - `testSolveUnsolvableMaze`: Validates that the A* algorithm correctly identifies an unsolvable maze.
+  - `testSolveBigMaze`: Tests the A* algorithm's performance and correctness on a larger maze.
 
-- placeholder
+- **GreedySearchTest**:
+  - `testSolve`: Checks if the Greedy algorithm can solve a basic maze.
+  - `testSolveUnsolvableMaze`: Validates that the Greedy algorithm correctly identifies an unsolvable maze.
+  - `testSolveBigMaze`: Tests the Greedy algorithm's performance and correctness on a larger maze.
+
+- **UniformCostSearchTest**:
+  - `testSolve`: Checks if the Uniform Cost Search algorithm can solve a basic maze.
+  - `testSolveUnsolvableMaze`: Validates that the Uniform Cost Search algorithm correctly identifies an unsolvable maze.
+  - `testSolveBigMaze`: Tests the Uniform Cost Search algorithm's performance and correctness on a larger maze.
+
+- **MazeParserTest**:
+  - `testParseMaze`: Validates that the maze parser correctly reads and interprets a maze file.
+  - `testEmptyFile`: Checks the parser's behavior when provided with an empty file.
+  - `testSizeMissingFile`: Validates the parser's behavior when the maze size is missing from the file.
+
+- **MazeTest**:
+  - `testGetNeighbors`: Checks if the maze correctly identifies the neighbors of a given node, considering obstacles.
+
+### To run the tests:
+
+- { placeholder }
 
 ## Notes
 
