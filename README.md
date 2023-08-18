@@ -29,7 +29,7 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 - **MazeGenerator**: Generates random mazes.
 - **SearchBaseTest**: Base class for search algorithm tests.
 
-## Install
+## Install Dependencies
 - dependencies are located in `java_maze_solution.iml`
 - install using you local IDE package manager
 
