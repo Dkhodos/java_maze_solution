@@ -4,6 +4,10 @@
 This project provides a set of search algorithms to solve a maze. The maze is represented as a grid, where each cell can either be a walkable path or an obstacle. The goal is to find a path from a starting point to an end point.
 ![Maze](static/maze.png)
 
+## Targets
+- Start <img src="static/player.png" width="20px" height="20px" style="position:relative; top: 4px">
+- End <img src="static/goal.png" width="20px" height="20px" style="position:relative; top: 4px">
+
 ## Features
 
 - **Search Algorithms**: The project includes multiple search algorithms:

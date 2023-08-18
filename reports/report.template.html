@@ -38,11 +38,17 @@
         }
 
         .maze-node.start {
-            background: green;
+            background-image: url(../static/player.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 2px;
         }
 
         .maze-node.end {
-            background: red;
+            background-image: url(../static/goal.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 2px;
         }
 
         .maze-node.solution {
@@ -103,12 +109,10 @@
 
         if (node.x === start.x && node.y === start.y){
             nodeElement.classList.add("start");
-            nodeElement.innerHTML = "<strong class='point'>S</strong>";
         }
 
         if (node.x === end.x && node.y === end.y){
             nodeElement.classList.add("end");
-            nodeElement.innerHTML = "<strong class='point'>E</strong>";
         }
 
         let size = 40;
