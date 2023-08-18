@@ -35,8 +35,6 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 
 ## Usage
 
-### Compile (if not using IDE)
-
 ### Main Program
 - Run main with `java Main.java <path-to-maze-file>`
 
