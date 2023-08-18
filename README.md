@@ -41,7 +41,7 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 - Example `java Main.java data/maze1.txt`
   ![IntelliJ Runner](static/run.png)
 
-### Maze Generator
+### Maze Generator (tests/MazeGenerator.java)
 - Run main in `java MazeGenerator.java`, you may adjust the size and difficulty in the main method
 
 ## Tests
