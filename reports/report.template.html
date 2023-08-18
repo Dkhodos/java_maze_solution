@@ -149,7 +149,7 @@
         countsElement.className = "counts";
 
         countsElement.innerHTML += `<p><strong>Path Length:</strong> ${solution.length}</p>`;
-        countsElement.innerHTML += `<p><strong>Visited Nodes Count:</strong> ${visitedNodes}</p>`;
+        countsElement.innerHTML += `<p><strong>Visited Nodes Count:</strong> ${visitedNodes}/ ${Math.pow(maze.length, 2)}</p>`;
 
         document.getElementById("root").appendChild(countsElement);
     }

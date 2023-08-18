@@ -6,7 +6,7 @@ public class GreedySearch extends SearchAlgorithm {
     public SearchResult solve(Maze maze, Node start, Node goal) {
         Map<Node, Integer> costMap = new HashMap<>();
         Set<Node> visitedNodes = new HashSet<>();
-        Frontier frontier = new Frontier(Comparator.comparing((Node n) -> this.getHeuristicDistance(n, goal)));
+        Frontier frontier = new Frontier(Comparator.comparing((Node n) -> this.comparator(n, goal)));
 
         frontier.add(start);
         costMap.put(start, 0);
@@ -34,5 +34,9 @@ public class GreedySearch extends SearchAlgorithm {
             }
         }
         return new SearchResult(new ArrayList<>(), visitedNodes);
+    }
+
+    private int comparator(Node node , Node goal){
+        return this.getHeuristicDistance(node, goal);
     }
 }
