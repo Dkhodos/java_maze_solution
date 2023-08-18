@@ -4,11 +4,16 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         Logger logger = new Logger("Main Class");
-        String file_path = System.getProperty("user.dir") + "/data/maze_1.txt";
-//        if (args.length != 1) {
-//            System.err.println("Usage: java Main <maze_file>");
-//            System.exit(1);
-//        }
+
+        if (args.length != 1) {
+            System.err.println("Usage: java Main <absolute_path_to_maze_file | relative_path_to_maze_file>");
+            System.exit(1);
+        }
+
+        String file_path = args[0];
+        if(!file_path.contains(System.getProperty("user.dir"))){
+            file_path = System.getProperty("user.dir") + "/" + file_path;
+        }
 
         MazeParser parser = new MazeParser();
         Maze maze = parser.parse(file_path);

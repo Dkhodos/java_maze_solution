@@ -2,13 +2,14 @@
 # Maze Solver
 
 This project provides a set of search algorithms to solve a maze. The maze is represented as a grid, where each cell can either be a walkable path or an obstacle. The goal is to find a path from a starting point to an end point.
+![Maze](static/maze.png)
 
 ## Features
 
 - **Search Algorithms**: The project includes multiple search algorithms:
-- A* Search
-- Greedy Search
-- Uniform Cost Search
+  - A* Search
+  - Greedy Search
+  - Uniform Cost Search
 - **Maze Parser**: Parses a maze from a file.
 - **Report Generation**: Generates an HTML report based on a given solution path through the maze.
 - **Search Executor**: Executes a list of search algorithms on a given maze, logs the execution time, displays the results, and generates a report for each algorithm.
@@ -36,7 +37,9 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 ## Usage
 
 ### Main Program
-- Run main with `java Main.java <path-to-maze-file>`
+- Run main with `java Main.java <absolute_path_to_maze_file | relative_path_to_maze_file>`
+- Example `java Main.java data/maze1.txt`
+  ![IntelliJ Runner](static/run.png)
 
 ### Maze Generator
 - Run main in `java MazeGenerator.java`, you may adjust the size and difficulty in the main method
