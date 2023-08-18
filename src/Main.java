@@ -11,7 +11,7 @@ public class Main {
         }
 
         String file_path = args[0];
-        if(!file_path.contains(System.getProperty("user.dir"))){
+        if(!file_path.contains("/java_maze_solution")){
             file_path = System.getProperty("user.dir") + "/" + file_path;
         }
 
