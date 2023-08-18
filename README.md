@@ -29,9 +29,19 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 - **MazeGenerator**: Generates random mazes.
 - **SearchBaseTest**: Base class for search algorithm tests.
 
+## Install
+- dependencies are located in `java_maze_solution.iml`
+- install using you local IDE package manager
+
 ## Usage
 
-- { placeholder }
+### Compile (if not using IDE)
+
+### Main Program
+- Run main with `java Main.java <path-to-maze-file>`
+
+### Maze Generator
+- Run main in `java MazeGenerator.java`, you may adjust the size and difficulty in the main method
 
 ## Tests
 - **AStarTest**:
@@ -59,7 +69,10 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 
 ### To run the tests:
 
-- { placeholder }
+- Use stock IntelliJ / Eclipse test runner
+
+## Github CI
+- Check `.github/workflows/tests.yaml`
 
 ## Notes
 

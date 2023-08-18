@@ -42,7 +42,6 @@ jobs:
       - name: Compile
         run: |
           javac -cp "lib/*" -d . src/*.java tests/*.java
-          echo $(ls -a)
 
       - name: Run tests
         run: |
