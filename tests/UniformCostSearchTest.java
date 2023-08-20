@@ -38,4 +38,13 @@ class UniformCostSearchTest extends SearchBaseTest{
 
         validateSearchResults(result.path(), result.visitedNodes(), 301, 2793);
     }
+
+    @Test
+    void testSolveScenario1(){
+        initMazeFromFile("maze_scenario_1.txt");
+
+        SearchResult result = ucs.solve(maze, start, goal);
+
+        validateSearchResults(result.path(), result.visitedNodes(), 15, 42);
+    }
 }

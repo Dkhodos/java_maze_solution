@@ -37,4 +37,13 @@ class AStarTest extends SearchBaseTest{
 
         validateSearchResults(result.path(), result.visitedNodes(), 301, 1837);
     }
+
+    @Test
+    void testSolveScenario1(){
+        initMazeFromFile("maze_scenario_1.txt");
+
+        SearchResult result = aStar.solve(maze, start, goal);
+
+        validateSearchResults(result.path(), result.visitedNodes(), 15, 48);
+    }
 }

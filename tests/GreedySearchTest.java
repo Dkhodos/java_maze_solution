@@ -35,6 +35,15 @@ class GreedySearchTest extends SearchBaseTest{
 
         SearchResult result = greedy.solve(maze, start, goal);
 
-        validateSearchResults(result.path(), result.visitedNodes(), 397, 1329);
+        validateSearchResults(result.path(), result.visitedNodes(), 395, 1324);
+    }
+
+    @Test
+    void testSolveScenario1(){
+        initMazeFromFile("maze_scenario_1.txt");
+
+        SearchResult result = greedy.solve(maze, start, goal);
+
+        validateSearchResults(result.path(), result.visitedNodes(), 15, 15);
     }
 }
