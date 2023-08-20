@@ -13,8 +13,8 @@ public abstract class SearchBaseTest {
         String filePath = System.getProperty("user.dir") + "/tests/test_data/" + fileName;
         maze = (new MazeParser()).parse(filePath);
 
-        start = maze.nodes()[0][0]; // Assuming start is at (0, 0)
-        goal = maze.nodes()[maze.size()-1][maze.size()-1]; // Assuming goal is at (n, n)
+        start = maze.getNode(0, 0); // Assuming start is at (0, 0)
+        goal = maze.getNode(maze.size()-1, maze.size()-1); // Assuming goal is at (n, n)
     }
 
     protected void validateSearchResults(List<Node> path, Set<Node> visitedNodes, int expectedPathSize,
