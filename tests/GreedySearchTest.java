@@ -17,7 +17,7 @@ class GreedySearchTest extends SearchBaseTest{
         SearchResult result = greedy.solve(maze, start, goal);
 
         assertTrue(result.path().isEmpty());
-        assertEquals(76, result.visitedNodes().size());
+        assertEquals(83, result.visitedNodes().size());
     }
 
     @Test
@@ -35,7 +35,7 @@ class GreedySearchTest extends SearchBaseTest{
 
         SearchResult result = greedy.solve(maze, start, goal);
 
-        validateSearchResults(result.path(), result.visitedNodes(), 395, 1324);
+        validateSearchResults(result.path(), result.visitedNodes(), 395, 1563);
     }
 
     @Test

@@ -36,9 +36,11 @@ public class AStarSearch extends SearchAlgorithm {
             // Get the node with the highest priority (lowest cost + heuristic) from the frontier.
             Node current = frontier.dequeue();
 
+            // update visited nodes to avoid repetition
+            visitedNodes.add(current);
+
             // If the current node is the goal, we've found a solution.
             if (current.equals(goal)) {
-                visitedNodes.add(current);
                 List<Node> finalPath = reconstructPath(path, goal);
                 return new SearchResult(finalPath, visitedNodes);
             }
@@ -56,7 +58,6 @@ public class AStarSearch extends SearchAlgorithm {
                 // If this tentative cost is less than the previously known cost for the neighbor,
                 // update the cost and path.
                 if (tentativeCost < getCost(neighbor, costMap)) {
-                    visitedNodes.add(current);
                     costMap.put(neighbor, tentativeCost);
                     path.put(neighbor, current);
                     frontier.update(neighbor);

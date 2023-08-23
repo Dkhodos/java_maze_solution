@@ -30,11 +30,13 @@ public class GreedySearch extends SearchAlgorithm {
         // Continue searching as long as there are nodes to explore.
         while (!frontier.isEmpty()) {
             // Get the node with the lowest heuristic distance to the goal from the frontier.
-            Node current = frontier.poll();
+            Node current = frontier.dequeue();
+
+            // update visited nodes to avoid repetition
+            visitedNodes.add(current);
 
             // If the current node is the goal, we've found a solution.
             if (current.equals(goal)) {
-                visitedNodes.add(current);
                 List<Node> finalPath = reconstructPath(path, goal);
                 return new SearchResult(finalPath, visitedNodes);
             }
@@ -48,7 +50,6 @@ public class GreedySearch extends SearchAlgorithm {
 
                 // Update the path to include the current node as the predecessor of the neighbor.
                 path.put(neighbor, current);
-                visitedNodes.add(current);
                 frontier.update(neighbor);
             }
         }

@@ -84,3 +84,4 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 - The maze file should start with a number indicating the size of the maze, followed by the maze grid where `0` represents a walkable path and `1` represents an obstacle.
 - The reports are generated as HTML files and can be viewed in a web browser.
 - The maze generator can be used to generate random mazes of varying difficulty levels.
+- We repeat code in the search algorithms for readability, using the template pattern makes the implementation hard to follow and debug

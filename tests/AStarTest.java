@@ -16,7 +16,7 @@ class AStarTest extends SearchBaseTest{
 
         SearchResult result = aStar.solve(maze, start, goal);
 
-        validateSearchResults(result.path(), result.visitedNodes(), 19, 50);
+        validateSearchResults(result.path(), result.visitedNodes(), 19, 58);
     }
 
     @Test
@@ -26,7 +26,7 @@ class AStarTest extends SearchBaseTest{
         SearchResult result = aStar.solve(maze, start, goal);
 
         assertTrue(result.path().isEmpty());
-        assertEquals( result.visitedNodes().size(), 63);
+        assertEquals(83, result.visitedNodes().size());
     }
 
     @Test
@@ -35,7 +35,7 @@ class AStarTest extends SearchBaseTest{
 
         SearchResult result = aStar.solve(maze, start, goal);
 
-        validateSearchResults(result.path(), result.visitedNodes(), 301, 1837);
+        validateSearchResults(result.path(), result.visitedNodes(), 301, 2484);
     }
 
     @Test
@@ -44,6 +44,6 @@ class AStarTest extends SearchBaseTest{
 
         SearchResult result = aStar.solve(maze, start, goal);
 
-        validateSearchResults(result.path(), result.visitedNodes(), 15, 48);
+        validateSearchResults(result.path(), result.visitedNodes(), 15, 55);
     }
 }

@@ -27,15 +27,6 @@ public class Frontier {
     }
 
     /**
-     * Retrieves and removes the head of this frontier, or returns null if this frontier is empty.
-     *
-     * @return The head of the frontier, or null if the frontier is empty.
-     */
-    public Node poll() {
-        return queue.poll();
-    }
-
-    /**
      * Checks if the frontier is empty.
      *
      * @return true if the frontier is empty, false otherwise.
