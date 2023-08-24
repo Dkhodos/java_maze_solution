@@ -91,3 +91,4 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 ## Notes
 - The maze file should start with a number indicating the size of the maze, followed by the maze grid where `0` represents a walkable path and `1` represents an obstacle.
 - The reports are generated as HTML files and can be viewed in a web browser.
+- This project is using the **Record** keyword which were introduced in `Java 14`: https://www.baeldung.com/java-record-keyword
