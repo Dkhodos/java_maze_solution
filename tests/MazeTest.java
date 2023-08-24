@@ -8,7 +8,7 @@ public class MazeTest {
         Node[][] nodes = new Node[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                nodes[i][j] = new Node(i, j, false); // fill the maze with non-obstacle nodes
+                nodes[i][j] = new Node(i, j); // fill the maze with non-obstacle nodes
             }
         }
 

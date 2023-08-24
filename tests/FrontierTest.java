@@ -18,7 +18,7 @@ public class FrontierTest {
     public void testIsEmpty() {
         assertTrue(frontier.isEmpty());
 
-        Node node = new Node(1, 1, false);
+        Node node = new Node(1, 1);
         frontier.add(node);
 
         assertFalse(frontier.isEmpty());
@@ -26,8 +26,8 @@ public class FrontierTest {
 
     @Test
     public void testDequeue() {
-        Node node1 = new Node(1, 1, false);
-        Node node2 = new Node(2, 2, false);
+        Node node1 = new Node(1, 1);
+        Node node2 = new Node(2, 2);
 
         frontier.add(node1);
         frontier.add(node2);
@@ -39,8 +39,8 @@ public class FrontierTest {
 
     @Test
     public void testRemove() {
-        Node node1 = new Node(1, 1, false);
-        Node node2 = new Node(2, 2, false);
+        Node node1 = new Node(1, 1);
+        Node node2 = new Node(2, 2);
 
         frontier.add(node1);
         frontier.add(node2);
@@ -50,10 +50,5 @@ public class FrontierTest {
         assertFalse(frontier.isEmpty());
         assertEquals(node2, frontier.dequeue());
         assertTrue(frontier.isEmpty());
-    }
-
-    @Test
-    public void testUpdate() {
-        //TODO
     }
 }

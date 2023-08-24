@@ -10,14 +10,14 @@ public class MazePathTest {
 
     @BeforeEach
     public void setUp() {
-        Node goal = new Node(2, 2, false);
+        Node goal = new Node(2, 2);
         mazePath = new MazePath(goal);
     }
 
     @Test
     public void testAdd() {
-        Node start = new Node(0, 0, false);
-        Node next = new Node(1, 1, false);
+        Node start = new Node(0, 0);
+        Node next = new Node(1, 1);
 
         mazePath.add(next, start);
 
@@ -26,8 +26,8 @@ public class MazePathTest {
 
     @Test
     public void testGetReconstructPathDataExists() {
-        Node start = new Node(0, 0, false);
-        Node next = new Node(1, 1, false);
+        Node start = new Node(0, 0);
+        Node next = new Node(1, 1);
 
         mazePath.add(next, start);
         mazePath.add(mazePath.getGoal(), next);
@@ -50,11 +50,11 @@ public class MazePathTest {
 
     @Test
     public void testGetReconstructPathSorted() {
-        Node start = new Node(0, 0, false);
-        Node n1 = new Node(1, 0, false);
-        Node n2 = new Node(2, 0, false);
-        Node n3 = new Node(3, 0, false);
-        Node n4 = new Node(4, 0, false);
+        Node start = new Node(0, 0);
+        Node n1 = new Node(1, 0);
+        Node n2 = new Node(2, 0);
+        Node n3 = new Node(3, 0);
+        Node n4 = new Node(4, 0);
 
         // Create an array of nodes and shuffle it
         Node[] nodes = {n1, n2, n3, n4};
