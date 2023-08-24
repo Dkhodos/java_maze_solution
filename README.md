@@ -1,4 +1,3 @@
-
 # Maze Solver
 
 This project provides a set of search algorithms to solve a maze. The maze is represented as a grid, where each cell can either be a walkable path or an obstacle. The goal is to find a path from a starting point to an end point.
@@ -11,19 +10,20 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 ## Features
 
 - **Search Algorithms**: The project includes multiple search algorithms:
-  - A* Search
-  - Greedy Search
-  - Uniform Cost Search
+  - A* Search: Uses a combination of the cost to reach a node and a heuristic to estimate the cost from that node to the goal.
+  - Greedy Search: Expands the node that is estimated to be closest to the goal using a heuristic.
+  - Uniform Cost Search: Expands the node with the lowest path cost.
 - **Maze Parser**: Parses a maze from a file.
 - **Report Generation**: Generates an HTML report based on a given solution path through the maze.
 - **Search Executor**: Executes a list of search algorithms on a given maze, logs the execution time, displays the results, and generates a report for each algorithm.
 - **Maze Generator**: Generates random mazes based on a given difficulty level.
-- **Testing**: Comprehensive unit tests for the search algorithms, maze parser, and maze functionalities.
+- **Testing**: Comprehensive unit tests for the search algorithms, maze parser, maze functionalities, and maze path reconstruction.
 
 ## Classes
 
 - **Maze**: Represents a grid-based maze with nodes.
 - **Node**: Represents a point in the maze.
+- **MazePath**: Represents a path through a maze using a map to store the relationship between a node and its predecessor in the path.
 - **SearchAlgorithm**: An abstract class that provides the base for search algorithms.
 - **Frontier**: A priority queue-based frontier used in search algorithms.
 - **Logger**: Provides color-coded console logging.
@@ -32,21 +32,20 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 - **SearchExecutor**: Executes search algorithms and generates reports.
 - **SearchResult**: Holds the result of a search algorithm.
 - **MazeGenerator**: Generates random mazes.
-- **SearchBaseTest**: Base class for search algorithm tests.
 
 ## Install Dependencies
-- dependencies are located in `java_maze_solution.iml`
-- install using you local IDE package manager
+- Dependencies are located in `java_maze_solution.iml`.
+- Install using your local IDE package manager.
 
 ## Usage
 
 ### Main Program
-- Run main with `java Main.java <absolute_path_to_maze_file | relative_path_to_maze_file>`
-- Example `java Main.java data/maze1.txt`
+- Run main with `java Main.java <absolute_path_to_maze_file | relative_path_to_maze_file>`.
+- Example `java Main.java data/maze1.txt`.
   ![IntelliJ Runner](static/run.png)
 
 ### Maze Generator (tests/MazeGenerator.java)
-- Run main in `java MazeGenerator.java`, you may adjust the size and difficulty in the main method
+- Run main in `java MazeGenerator.java`, you may adjust the size and difficulty in the main method.
 
 ## Tests
 - **AStarTest**:
@@ -72,16 +71,19 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 - **MazeTest**:
   - `testGetNeighbors`: Checks if the maze correctly identifies the neighbors of a given node, considering obstacles.
 
+- **MazePathTest**:
+  - `testAdd`: Validates the addition of nodes and their predecessors to the path.
+  - `testGetReconstructPathDataExists`: Checks the correct reconstruction of the path when data exists.
+  - `testGetReconstructPathEmpty`: Validates the behavior when trying to reconstruct a path with no data.
+  - `testGetReconstructPathSorted`: Ensures the reconstructed path is correctly sorted.
+
 ### To run the tests:
 
-- Use stock IntelliJ / Eclipse test runner
+- Use stock IntelliJ / Eclipse test runner.
 
 ## Github CI
-- Check `.github/workflows/tests.yaml`
+- Check `.github/workflows/tests.yaml`.
 
 ## Notes
-
 - The maze file should start with a number indicating the size of the maze, followed by the maze grid where `0` represents a walkable path and `1` represents an obstacle.
 - The reports are generated as HTML files and can be viewed in a web browser.
-- The maze generator can be used to generate random mazes of varying difficulty levels.
-- We repeat code in the search algorithms for readability, using the template pattern makes the implementation hard to follow and debug

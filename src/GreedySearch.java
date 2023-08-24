@@ -7,65 +7,34 @@ import java.util.*;
 public class GreedySearch extends SearchAlgorithm {
 
     /**
-     * Solves the maze using the Greedy Search algorithm.
+     * Updates the path for the Greedy Search algorithm.
+     * The path is updated to include the current node as the predecessor of the neighbor.
+     * The cost is not considered in the Greedy Search update.
      *
-     * @param maze The maze to be solved.
-     * @param start The starting node.
-     * @param goal The goal node.
-     * @return SearchResult containing the path from start to goal and the set of visited nodes.
+     * @param neighbor The neighboring node.
+     * @param current The current node.
+     * @param costMap The map containing the costs associated with each node (not used in this update, but present due to method signature).
+     * @param path The path being constructed.
+     * @param frontier The nodes yet to be explored.
      */
     @Override
-    public SearchResult solve(Maze maze, Node start, Node goal) {
-        // Initialize the set of visited nodes.
-        Set<Node> visitedNodes = new HashSet<>();
-        // Initialize the frontier with a comparator that prioritizes nodes based on their heuristic distance to the goal.
-        Frontier frontier = new Frontier(Comparator.comparing((Node n) -> this.comparator(n, goal)));
-
-        // Add the starting node to the frontier.
-        frontier.add(start);
-
-        // This map will be used to backtrack from the goal to the start to reconstruct the path.
-        Map<Node, Node> path = new HashMap<>();
-
-        // Continue searching as long as there are nodes to explore.
-        while (!frontier.isEmpty()) {
-            // Get the node with the lowest heuristic distance to the goal from the frontier.
-            Node current = frontier.dequeue();
-
-            // update visited nodes to avoid repetition
-            visitedNodes.add(current);
-
-            // If the current node is the goal, we've found a solution.
-            if (current.equals(goal)) {
-                List<Node> finalPath = reconstructPath(path, goal);
-                return new SearchResult(finalPath, visitedNodes);
-            }
-
-            // Explore the neighbors of the current node.
-            for (Node neighbor : maze.getNeighbors(current)) {
-                // If the neighbor has already been visited, skip it.
-                if(visitedNodes.contains(neighbor)){
-                    continue;
-                }
-
-                // Update the path to include the current node as the predecessor of the neighbor.
-                path.put(neighbor, current);
-                frontier.update(neighbor);
-            }
-        }
-
-        // If we've exhausted all nodes and haven't found the goal, return an empty path.
-        return new SearchResult(new ArrayList<>(), visitedNodes);
+    public void update(Node neighbor,Node current, Map<Node, Integer> costMap, MazePath path, Frontier frontier) {
+        // Update the path to include the current node as the predecessor of the neighbor.
+        path.add(neighbor, current);
+        frontier.update(neighbor);
     }
 
     /**
-     * Comparator function to prioritize nodes based on their heuristic distance to the goal.
+     * Compares two nodes based on their heuristic distance to the goal for the Greedy Search algorithm.
+     * Only the heuristic distance to the goal is considered, without any actual cost to reach the node.
      *
-     * @param node The node to be compared.
-     * @param goal The goal node.
-     * @return The heuristic distance from the node to the goal.
+     * @param node The node from which the heuristic distance is to be calculated.
+     * @param goal The goal node to which the heuristic distance is to be calculated.
+     * @param costMap The map containing the costs associated with each node (not used in this comparison, but present due to method signature).
+     * @return An integer representing the heuristic distance between the given node and the goal node.
      */
-    private int comparator(Node node , Node goal){
+    @Override
+    protected int comparator(Node node, Node goal, Map<Node, Integer> costMap){
         return this.getHeuristicDistance(node, goal);
     }
 }

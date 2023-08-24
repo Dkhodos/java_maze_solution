@@ -5,16 +5,80 @@ import java.util.*;
  * This is a stateless class, meaning it doesn't maintain any state information between method calls.
  */
 public abstract class SearchAlgorithm {
+    /**
+     * Compares two nodes based on their cost and heuristic values.
+     *
+     * @param node The node to be compared.
+     * @param goal The goal node.
+     * @param costMap The map containing the costs associated with each node.
+     * @return An integer representing the comparison result.
+     */
+    protected abstract int comparator(Node node, Node goal, Map<Node, Integer> costMap);
 
     /**
-     * Solves the given maze using a specific search algorithm to find a path from the start node to the goal node.
+     * Updates the cost, path, and frontier based on the current node and its neighbor.
+     *
+     * @param neighbor The neighboring node.
+     * @param current The current node.
+     * @param costMap The map containing the costs associated with each node.
+     * @param path The path being constructed.
+     * @param frontier The nodes yet to be explored.
+     */
+    protected abstract void update(Node neighbor,Node current, Map<Node, Integer> costMap, MazePath path, Frontier frontier);
+
+    /**
+     * Solves the maze using the implemented search algorithm.
      *
      * @param maze The maze to be solved.
      * @param start The starting node.
      * @param goal The goal node.
-     * @return A SearchResult object containing the path found and the nodes visited during the search.
+     * @return The result of the search, containing the path and visited nodes.
      */
-    public abstract SearchResult solve(Maze maze, Node start, Node goal);
+    public SearchResult solve(Maze maze, Node start, Node goal) {
+        // Initialize the cost map and the set of visited nodes.
+        Map<Node, Integer> costMap = new HashMap<>();
+        Set<Node> visitedNodes = new HashSet<>();
+
+        // Initialize the frontier with a comparator that prioritizes nodes based on A* criteria.
+        Frontier frontier = new Frontier(Comparator.comparing((Node n) -> this.comparator(n ,goal, costMap)));
+
+        // This map will be used to backtrack from the goal to the start to reconstruct the path.
+        MazePath path = new MazePath(goal);
+
+        // Set the starting node's cost to 0 and add it to the frontier.
+        costMap.put(start, 0);
+        frontier.add(start);
+
+        // Continue searching as long as there are nodes to explore.
+        while (!frontier.isEmpty()) {
+            // Get the node with the highest priority (lowest cost + heuristic) from the frontier.
+            Node current = frontier.dequeue();
+
+            // update visited nodes to avoid repetition
+            visitedNodes.add(current);
+
+            // If the current node is the goal, we've found a solution.
+            if (current.equals(goal)) {
+                List<Node> finalPath = path.getReconstructPath();
+                return new SearchResult(finalPath, visitedNodes);
+            }
+
+            // Explore the neighbors of the current node.
+            for (Node neighbor : maze.getNeighbors(current)) {
+                // If the neighbor has already been visited, skip it.
+                if (visitedNodes.contains(neighbor)) {
+                    continue;
+                }
+
+                // execute update of  costMap, path and frontier
+                // update will be according to the specific algorithm logic
+                this.update(neighbor, current, costMap, path, frontier);
+            }
+        }
+
+        // If we've exhausted all nodes and haven't found the goal, return an empty path.
+        return new SearchResult(new ArrayList<>(), visitedNodes);
+    }
 
     /**
      * Retrieves the cost associated with a given node from the cost map.
@@ -38,24 +102,5 @@ public abstract class SearchAlgorithm {
      */
     protected int getHeuristicDistance(Node node, Node goal){
         return (Math.abs(node.x() - goal.x()) + Math.abs(node.y() - goal.y()));
-    }
-
-    /**
-     * Reconstructs the path from the start node to the goal node using the given path map.
-     * The path map contains each node's parent in the path.
-     *
-     * @param path The map containing each node and its parent in the path.
-     * @param goal The goal node.
-     * @return A list of nodes representing the path from the start node to the goal node.
-     */
-    protected List<Node> reconstructPath(Map<Node, Node> path, Node goal) {
-        List<Node> result = new ArrayList<>();
-        Node node = goal;
-        while (node != null) {
-            result.add(node);
-            node = path.get(node);
-        }
-        Collections.reverse(result);
-        return result;
     }
 }

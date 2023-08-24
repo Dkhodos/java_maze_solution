@@ -1,12 +1,17 @@
 import java.util.Comparator;
 import java.util.PriorityQueue;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The Frontier class represents a priority queue-based frontier used in search algorithms.
- * It wraps around Java's PriorityQueue to provide specific functionalities needed for the search algorithms.
+ * It wraps around Java's PriorityQueue and uses a HashSet for efficient node removal.
+ * The PriorityQueue determines the priority of nodes based on a provided comparator,
+ * while the HashSet allows for quick membership checks and removals.
  */
 public class Frontier {
-    private final PriorityQueue<Node> queue;
+    private final PriorityQueue<Node> queue;  // Priority queue to manage node priorities
+    private final Set<Node> nodeSet;  // HashSet for quick membership checks and removals
 
     /**
      * Constructs a new Frontier with a given comparator to determine the priority of nodes.
@@ -15,6 +20,7 @@ public class Frontier {
      */
     public Frontier(Comparator<Node> comparator) {
         this.queue = new PriorityQueue<>(comparator);
+        this.nodeSet = new HashSet<>();
     }
 
     /**
@@ -24,6 +30,7 @@ public class Frontier {
      */
     public void add(Node node) {
         queue.add(node);
+        nodeSet.add(node);
     }
 
     /**
@@ -41,26 +48,31 @@ public class Frontier {
      * @return The head of the frontier.
      */
     public Node dequeue(){
-        return this.queue.remove();
+        Node node = this.queue.remove();
+        nodeSet.remove(node);
+        return node;
     }
 
     /**
-     * Removes a specific node from the frontier.
+     * Removes a specific node from the frontier if it exists.
      *
      * @param node The node to be removed.
      */
     public void remove(Node node){
-        this.queue.remove(node);
+        if (nodeSet.contains(node)) {
+            nodeSet.remove(node);
+            queue.remove(node);
+        }
     }
 
     /**
-     * Updates the position of a node in the frontier. This is typically used when the priority of a node changes.
-     * The method removes the node and then adds it back to reposition it based on its new priority.
+     * Updates the position of a node in the frontier based on its new priority.
+     * The method removes the node (if it exists) and then adds it back to reposition it.
      *
      * @param node The node to be updated.
      */
     public void update(Node node){
-        this.remove(node);
-        this.add(node);
+        this.remove(node);  // Remove the old node if it exists
+        this.add(node);     // Add the updated node
     }
 }
