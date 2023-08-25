@@ -40,7 +40,6 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 - **Node**: Represents a point in the maze.
 - **MazePath**: Represents a path through a maze using a map to store the relationship between a node and its predecessor in the path.
 - **SearchAlgorithm**: An abstract class that provides the base for search algorithms.
-- **Frontier**: A priority queue-based frontier used in search algorithms. It efficiently handles node updates and removals using a combination of a priority queue and a hash set.
 - **Logger**: Provides color-coded console logging.
 - **MazeParser**: Parses a maze from a file.
 - **ReportMaker**: Generates an HTML report.

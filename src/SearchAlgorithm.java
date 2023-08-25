@@ -15,7 +15,7 @@ public abstract class SearchAlgorithm {
      * @param costMap The map containing the costs associated with each node.
      * @return An integer representing the comparison result.
      */
-    protected abstract int comparator(Node node, Node goal, Map<Node, Integer> costMap);
+    protected abstract double comparator(Node node, Node goal, Map<Node, Integer> costMap);
 
     /**
      * Updates the cost, path, and frontier based on the current node and its neighbor.
@@ -24,7 +24,6 @@ public abstract class SearchAlgorithm {
      * @param current The current node.
      * @param costMap The map containing the costs associated with each node.
      * @param path The path being constructed.
-     * @param frontier The nodes yet to be explored.
      */
     protected abstract boolean update(Node neighbor,Node current, Map<Node, Integer> costMap, MazePath path);
 
@@ -42,7 +41,7 @@ public abstract class SearchAlgorithm {
         Set<Node> visitedNodes = new HashSet<>();
 
         // Initialize the frontier with a comparator that prioritizes nodes based on A* criteria.
-        Frontier frontier = new Frontier(Comparator.comparing((Node n) -> this.comparator(n ,goal, costMap)));
+        PriorityQueue<Node> frontier = new PriorityQueue<>(Comparator.comparingDouble((Node n) -> this.comparator(n ,goal, costMap)));
 
         // This map will be used to backtrack from the goal to the start to reconstruct the path.
         MazePath path = new MazePath(goal);
@@ -54,7 +53,7 @@ public abstract class SearchAlgorithm {
         // Continue searching as long as there are nodes to explore.
         while (!frontier.isEmpty()) {
             // Get the node with the highest priority (lowest cost + heuristic) from the frontier.
-            Node current = frontier.dequeue();
+            Node current = frontier.poll();
 
             // update visited nodes to avoid repetition
             visitedNodes.add(current);
@@ -106,7 +105,7 @@ public abstract class SearchAlgorithm {
      * @param goal The goal node to which the distance is to be calculated.
      * @return The heuristic distance between the given node and the goal node.
      */
-    protected int getHeuristicDistance(Node node, Node goal){
+    protected double getHeuristicDistance(Node node, Node goal){
         return (Math.abs(node.x() - goal.x()) + Math.abs(node.y() - goal.y()));
     }
 }

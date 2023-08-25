@@ -20,7 +20,6 @@ public class GreedySearch extends SearchAlgorithm {
      * @param current The current node.
      * @param costMap The map containing the costs associated with each node (not used in this update, but present due to method signature).
      * @param path The path being constructed.
-     * @param frontier The nodes yet to be explored.
      */
     @Override
     public boolean update(Node neighbor,Node current, Map<Node, Integer> costMap, MazePath path) {
@@ -37,7 +36,7 @@ public class GreedySearch extends SearchAlgorithm {
      * @return An integer representing the heuristic distance between the given node and the goal node.
      */
     @Override
-    protected int comparator(Node node, Node goal, Map<Node, Integer> costMap){
+    protected double comparator(Node node, Node goal, Map<Node, Integer> costMap){
         return this.getHeuristicDistance(node, goal);
     }
 }

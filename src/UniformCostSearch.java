@@ -44,7 +44,7 @@ public class UniformCostSearch extends SearchAlgorithm {
      * @param costMap The map containing the costs associated with each node.
      * @return An integer representing the cost associated with the given node.
      */
-    protected int comparator(Node node, Node goal, Map<Node, Integer> costMap){
+    protected double comparator(Node node, Node goal, Map<Node, Integer> costMap){
         return this.getCost(node, costMap);
     }
 }

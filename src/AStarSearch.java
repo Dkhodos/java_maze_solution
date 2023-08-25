@@ -46,7 +46,7 @@ public class AStarSearch extends SearchAlgorithm {
      * @param costMap The map containing the costs associated with each node.
      * @return An integer representing the sum of the cost to reach the node and the heuristic distance to the goal.
      */
-    protected int comparator(Node node , Node goal, Map<Node, Integer> costMap){
+    protected double comparator(Node node , Node goal, Map<Node, Integer> costMap){
         return this.getHeuristicDistance(node, goal) + this.getCost(node, costMap);
     }
 }
