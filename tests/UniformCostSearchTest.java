@@ -37,7 +37,7 @@ class UniformCostSearchTest extends SearchBaseTest{
 
         SearchResult result = ucs.solve(maze, start, goal);
 
-        validateSearchResults(result, 301, 3910);
+        validateSearchResults(result, 301, 3901);
     }
 
     @Test

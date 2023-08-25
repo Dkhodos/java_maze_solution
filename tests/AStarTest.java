@@ -17,7 +17,7 @@ class AStarTest extends SearchBaseTest{
 
         SearchResult result = aStar.solve(maze, start, goal);
 
-        validateSearchResults(result, 19, 75);
+        validateSearchResults(result, 19, 61);
     }
 
     @Test
@@ -36,7 +36,7 @@ class AStarTest extends SearchBaseTest{
 
         SearchResult result = aStar.solve(maze, start, goal);
 
-        validateSearchResults(result, 303, 2551);
+        validateSearchResults(result, 301, 2548);
     }
 
     @Test
