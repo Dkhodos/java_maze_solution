@@ -1,11 +1,3 @@
-SearchExecutor: AStarSearch executed in 14ms
-(Astar, search: 50; path length: 19): (1, 1) (1, 2) (1, 3) (2, 3) (2, 4) (2, 5) (2, 6) (3, 6) (3, 7) (3, 8) (4, 8) (4, 9) (4, 10) (5, 10) (6, 10) (7, 10) (8, 10) (9, 10) (10, 10) 
-ReportMaker: Report written to /Users/danikhodos/src/University/java_maze_solution/reports/report.Astar.html
-
-SearchExecutor: GreedySearch executed in 1ms
-(Greedy, search: 34; path length: 23): (1, 1) (2, 1) (3, 1) (4, 1) (4, 2) (3, 2) (3, 3) (2, 3) (2, 4) (2, 5) (3, 5) (4, 5) (5, 5) (5, 6) (6, 6) (7, 6) (8, 6) (9, 6) (10, 6) (10, 7) (10, 8) (10, 9) (10, 10) 
-ReportMaker: Report written to /Users/danikhodos/src/University/java_maze_solution/reports/report.Greedy.html
-
-SearchExecutor: UniformCostSearch executed in 1ms
+(Astar, search: 40; path length: 19): (1, 1) (1, 2) (1, 3) (2, 3) (2, 4) (2, 5) (2, 6) (3, 6) (3, 7) (3, 8) (4, 8) (4, 9) (4, 10) (5, 10) (6, 10) (7, 10) (8, 10) (9, 10) (10, 10) 
+(Greedy, search: 34; path length: 21): (1, 1) (2, 1) (3, 1) (3, 2) (3, 3) (2, 3) (2, 4) (2, 5) (3, 5) (4, 5) (5, 5) (5, 6) (6, 6) (7, 6) (8, 6) (9, 6) (10, 6) (10, 7) (10, 8) (10, 9) (10, 10) 
 (UCS, search: 85; path length: 19): (1, 1) (1, 2) (1, 3) (2, 3) (2, 4) (2, 5) (3, 5) (4, 5) (4, 6) (5, 6) (6, 6) (7, 6) (8, 6) (8, 7) (8, 8) (9, 8) (9, 9) (10, 9) (10, 10) 
-ReportMaker: Report written to /Users/danikhodos/src/University/java_maze_solution/reports/report.UCS.html

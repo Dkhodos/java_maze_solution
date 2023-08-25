@@ -1,3 +1,5 @@
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -8,14 +10,16 @@ public class SearchExecutor {
     private final List<SearchAlgorithm> algorithms;
     private static final Logger logger = new Logger("SearchExecutor");
     private static final ReportMaker reportMaker = new ReportMaker();
+    private final String fileName;
 
     /**
      * Initializes a new instance of the SearchExecutor with a list of search algorithms.
      *
      * @param algorithms The list of search algorithms to be executed.
      */
-    public SearchExecutor(List<SearchAlgorithm> algorithms) {
+    public SearchExecutor(List<SearchAlgorithm> algorithms, String filePath) {
         this.algorithms = algorithms;
+        this.fileName = getFileName(filePath);
     }
 
     /**
@@ -26,39 +30,43 @@ public class SearchExecutor {
      * @param goal The goal node in the maze.
      */
     public void executeSearchAndGenerateReports(Maze maze, Node start, Node goal) {
+        StringBuilder outputs = new StringBuilder();
+
         for (SearchAlgorithm algorithm : algorithms) {
-            executeAlgorithm(algorithm, maze, start, goal);
+            SearchResult result = algorithm.solve(maze, start, goal);
+            reportMaker.createReport(start, goal, maze, result);
+
+            String output = result.toString();
+            logger.info(output);
             System.out.println();
+
+            outputs.append(output).append("\n");
         }
-    }
 
-    /**
-     * Executes a specific search algorithm on the provided maze, logs the execution time,
-     * displays the results, and generates a report.
-     *
-     * @param algorithm The search algorithm to be executed.
-     * @param maze The maze to be solved.
-     * @param start The starting node in the maze.
-     * @param goal The goal node in the maze.
-     */
-    private void executeAlgorithm(SearchAlgorithm algorithm, Maze maze, Node start, Node goal) {
-        long startTime = System.currentTimeMillis();
-
-        SearchResult result = algorithm.solve(maze, start, goal);
-
-        long endTime = System.currentTimeMillis();
-        logger.info(String.format("%s executed in %dms", algorithm.getClass().getSimpleName(), endTime - startTime));
-
-        displayResults(result);
-        reportMaker.createReport(start, goal, maze, result);
+        printToFile(outputs);
     }
 
     /**
      * Displays the results of a search algorithm's execution.
      *
-     * @param result The result of the algorithm's execution.
+     * @param output The result of the algorithm's execution.
      */
-    private void displayResults(SearchResult result) {
-        System.out.println(result.toString());
+    private void printToFile(StringBuilder output) {
+        PrintWriter writer;
+        try {
+            writer = new PrintWriter("outputs/"+ fileName, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        writer.print(output);
+        writer.close();
+    }
+
+
+    private String getFileName(String filePath){
+        String [] paths = filePath.split("/");
+
+        return paths[paths.length - 1];
     }
 }

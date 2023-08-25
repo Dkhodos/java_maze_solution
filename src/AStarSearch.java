@@ -33,7 +33,7 @@ public class AStarSearch extends SearchAlgorithm {
         if (tentativeCost < getCost(neighbor, costMap)) {
             costMap.put(neighbor, tentativeCost);
             path.add(neighbor, current);
-            frontier.update(neighbor);
+            frontier.add(neighbor);
         }
     }
 

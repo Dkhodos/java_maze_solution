@@ -17,16 +17,11 @@ public class Main {
             System.exit(1);
         }
 
-        String file_path = args[0];
-
-        // Adjust the file path if it doesn't contain the expected directory structure.
-        if(!file_path.contains("/java_maze_solution")){
-            file_path = System.getProperty("user.dir") + "/" + file_path;
-        }
+        String filePath = args[0];
 
         // Parse the maze from the provided file.
         MazeParser parser = new MazeParser();
-        Maze maze = parser.parse(file_path);
+        Maze maze = parser.parse(filePath);
         if (maze == null) {
             logger.error("Error parsing maze file.");
             System.exit(1);
@@ -44,7 +39,7 @@ public class Main {
         );
 
         // Initialize the search executor and execute each algorithm on the maze.
-        SearchExecutor executor = new SearchExecutor(algorithmsList);
+        SearchExecutor executor = new SearchExecutor(algorithmsList, filePath);
         executor.executeSearchAndGenerateReports(maze, start, goal);
     }
 }

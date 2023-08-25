@@ -65,14 +65,7 @@ public class Frontier {
         }
     }
 
-    /**
-     * Updates the position of a node in the frontier based on its new priority.
-     * The method removes the node (if it exists) and then adds it back to reposition it.
-     *
-     * @param node The node to be updated.
-     */
-    public void update(Node node){
-        this.remove(node);  // Remove the old node if it exists
-        this.add(node);     // Add the updated node
+    public boolean contains(Node node){
+        return nodeSet.contains(node);
     }
 }

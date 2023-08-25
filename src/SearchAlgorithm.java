@@ -68,7 +68,7 @@ public abstract class SearchAlgorithm {
             // Explore the neighbors of the current node.
             for (Node neighbor : maze.getNeighbors(current)) {
                 // If the neighbor has already been visited, skip it.
-                if (visitedNodes.contains(neighbor)) {
+                if (visitedNodes.contains(neighbor) || frontier.contains(neighbor)) {
                     continue;
                 }
 

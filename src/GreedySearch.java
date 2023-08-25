@@ -26,7 +26,7 @@ public class GreedySearch extends SearchAlgorithm {
     public void update(Node neighbor,Node current, Map<Node, Integer> costMap, MazePath path, Frontier frontier) {
         // Update the path to include the current node as the predecessor of the neighbor.
         path.add(neighbor, current);
-        frontier.update(neighbor);
+        frontier.add(neighbor);
     }
 
     /**
