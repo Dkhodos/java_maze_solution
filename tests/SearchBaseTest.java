@@ -1,6 +1,3 @@
-import java.util.List;
-import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -17,12 +14,18 @@ public abstract class SearchBaseTest {
         goal = maze.getNode(maze.size()-1, maze.size()-1); // Assuming goal is at (n, n)
     }
 
-    protected void validateSearchResults(List<Node> path, Set<Node> visitedNodes, int expectedPathSize,
+    protected void validateSearchResults(SearchResult result, int expectedPathSize,
                                          int expectedVisitedNodesSize){
-        assertFalse(path.isEmpty());
-        assertEquals(start, path.get(0));
-        assertEquals(goal, path.get(path.size() - 1));
-        assertEquals(expectedPathSize, path.size(), "Unexpected path size");
-        assertEquals(expectedVisitedNodesSize, visitedNodes.size(), "Unexpected visited size");
+        assertFalse(result.path().isEmpty(), "Path is Empty!");
+        assertEquals(start, result.path().get(0), "Start isn't (0, 0)!");
+        assertEquals(goal, result.path().get(result.path().size() - 1), "End isn't (n-1, n-1)!");
+        assertEquals(expectedPathSize, result.path().size(), "Unexpected path size!");
+        assertEquals(expectedVisitedNodesSize, result.visitedNodes().size(), "Unexpected visited size!");
+    }
+
+    protected void validateScenarioResults(SearchResult result, String expected, int expectedPathSize,
+                                           int expectedVisitedNodesSize){
+        validateSearchResults(result, expectedPathSize, expectedVisitedNodesSize);
+        assertEquals(expected, result.toString(), "Unexpected result output!");
     }
 }

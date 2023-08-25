@@ -15,6 +15,6 @@ public record Node(int x, int y, boolean isObstacle) {
 
     @Override
     public String toString() {
-        return String.format("(%d, %d)", x, y);
+        return String.format("(%d, %d)", x + 1, y + 1);
     }
 }

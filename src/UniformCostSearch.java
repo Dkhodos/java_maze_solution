@@ -5,6 +5,10 @@ import java.util.*;
  * This algorithm expands the node with the lowest path cost.
  */
 public class UniformCostSearch extends SearchAlgorithm {
+    @Override
+    public String getName() {
+        return "UCS";
+    }
 
     /**
      * Updates the cost, path, and frontier for the Uniform Cost Search algorithm.

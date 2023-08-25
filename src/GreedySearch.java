@@ -5,6 +5,11 @@ import java.util.*;
  * This algorithm expands the node that is estimated to be closest to the goal.
  */
 public class GreedySearch extends SearchAlgorithm {
+    @Override
+    public String getName() {
+        return "Greedy";
+    }
+
 
     /**
      * Updates the path for the Greedy Search algorithm.

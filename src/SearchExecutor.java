@@ -6,8 +6,6 @@ import java.util.List;
  */
 public class SearchExecutor {
     private final List<SearchAlgorithm> algorithms;
-    private static final String RESULT_TEMPLATE = "Algorithm: %s, Visited Nodes: %d, Path Length: %d";
-
     private static final Logger logger = new Logger("SearchExecutor");
     private static final ReportMaker reportMaker = new ReportMaker();
 
@@ -51,34 +49,16 @@ public class SearchExecutor {
         long endTime = System.currentTimeMillis();
         logger.info(String.format("%s executed in %dms", algorithm.getClass().getSimpleName(), endTime - startTime));
 
-        displayResults(algorithm, result);
-        reportMaker.createReport(start, goal, maze, result.path(), algorithm.getClass().getSimpleName(), result.visitedNodes().size());
+        displayResults(result);
+        reportMaker.createReport(start, goal, maze, result);
     }
 
     /**
      * Displays the results of a search algorithm's execution.
      *
-     * @param algorithm The executed search algorithm.
      * @param result The result of the algorithm's execution.
      */
-    private void displayResults(SearchAlgorithm algorithm, SearchResult result) {
-        String response = String.format(
-                RESULT_TEMPLATE,
-                algorithm.getClass().getSimpleName(),
-                result.visitedNodes().size(),
-                result.path().size()
-        );
-        System.out.print(response + " ");
-        printPath(result.path());
-    }
-
-    /**
-     * Prints the path found by a search algorithm.
-     *
-     * @param path The path to be printed.
-     */
-    private void printPath(List<Node> path) {
-        path.forEach(node -> System.out.print(node + " "));
-        System.out.println();
+    private void displayResults(SearchResult result) {
+        System.out.println(result.toString());
     }
 }

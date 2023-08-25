@@ -22,28 +22,25 @@ public class ReportMaker {
      * @param start The starting node of the maze.
      * @param end The goal node of the maze.
      * @param maze The maze object containing the nodes and their properties.
-     * @param solution The list of nodes representing the solution path.
-     * @param name The name of the search algorithm used.
-     * @param visitedNodes The number of nodes visited during the search.
      */
-    public void createReport(Node start,Node end, Maze maze, List<Node> solution, String name, int visitedNodes) {
+    public void createReport(Node start,Node end, Maze maze, SearchResult result) {
         try {
             // Reading the template HTML
             String html = new String(Files.readAllBytes(Paths.get(reportTemplateFile)));
 
             // Replacing the placeholders with the respective data
             html = html.replace("{{maze}}", stringifyMaze(maze));
-            html = html.replace("{{solution}}", stringifySolution(solution));
+            html = html.replace("{{solution}}", stringifySolution(result.path()));
             html = html.replace("{{start}}", stringifyNode(start));
             html = html.replace("{{end}}", stringifyNode(end));
-            html = html.replace("{{visitedNodes}}", String.valueOf(visitedNodes));
-            html = html.replace("{{className}}", name);
+            html = html.replace("{{visitedNodes}}", String.valueOf(result.visitedNodes().size()));
+            html = html.replace("{{className}}", result.name());
 
             // Preparing the report directory
             String reportDirectory = System.getProperty("user.dir") + "/reports";
 
             // Create the new report file with the incremented count
-            String reportFile = reportDirectory + "/report" + "." + name + ".html";
+            String reportFile = reportDirectory + "/report" + "." + result.name() + ".html";
             Files.write(Paths.get(reportFile), html.getBytes());
 
             logger.info("Report written to " + reportFile);

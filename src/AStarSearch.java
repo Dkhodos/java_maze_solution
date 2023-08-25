@@ -6,6 +6,10 @@ import java.util.*;
  * This combination helps A* to find the shortest path in an efficient manner.
  */
 public class AStarSearch extends SearchAlgorithm {
+    @Override
+    public String getName() {
+        return "Astar";
+    }
 
     /**
      * Updates the cost, path, and frontier for the A* algorithm.
