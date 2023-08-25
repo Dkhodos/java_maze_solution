@@ -37,22 +37,28 @@
             transition: .2s all ease-in-out;
         }
 
-        .maze-node.start {
+        .maze-node:before  {
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 2px;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+        }
+
+        .maze-node.start:before{
+            content: " ";
             background-image: url(../static/player.png);
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: 2px;
         }
 
-        .maze-node.end {
+        .maze-node.end:before {
+            content: " ";
             background-image: url(../static/goal.png);
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: 2px;
         }
 
-        .maze-node.solution {
-            background: aqua;
+        .maze-node.solution, .maze-node.end, .maze-node.start {
+            background: lightgreen;
+            position: relative;
         }
 
 
