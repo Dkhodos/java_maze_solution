@@ -11,6 +11,17 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 - for input: `data/maze_scenario_1.txt` output: `outputs/maze_scenario_1.txt`
 - for input: `data/maze_scenario_2.txt` output: `outputs/maze_scenario_2.txt`
 
+### Project Structure:
+- 📁 **.github** - GitHub actions for automatic test (CI).
+- 📁 **.idea** - IntelliJ project files
+- 📁 **data** - possible inputs for the Main program.
+- 📁 **outputs** - outputs for the possible inputs for the Main program.
+- 📁 **reports** - HTML report template, and the folder that the temp reports are generated for.
+- 📁 **src** - the actual Java code.
+- 📁 **static** - a resource folder, mostly for the readme and the reports.
+- 📁 **tests** - tests folder, with its own test data.
+- 📄 **java_maze_solution.iml** - class path dependencies (for IntelliJ projects).
+
 ## Features
 
 - **Search Algorithms**: The project includes multiple search algorithms:
