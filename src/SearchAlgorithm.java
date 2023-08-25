@@ -37,8 +37,6 @@ public abstract class SearchAlgorithm {
      * @return The result of the search, containing the path and visited nodes.
      */
     public SearchResult solve(Maze maze, Node start, Node goal) {
-        String name = getName();
-
         // Initialize the cost map and the set of visited nodes.
         Map<Node, Integer> costMap = new HashMap<>();
         Set<Node> visitedNodes = new HashSet<>();
@@ -64,7 +62,7 @@ public abstract class SearchAlgorithm {
             // If the current node is the goal, we've found a solution.
             if (current.equals(goal)) {
                 List<Node> finalPath = path.getReconstructPath();
-                return new SearchResult(finalPath, visitedNodes, name);
+                return new SearchResult(finalPath, visitedNodes, getName());
             }
 
             // Explore the neighbors of the current node.
@@ -81,7 +79,7 @@ public abstract class SearchAlgorithm {
         }
 
         // If we've exhausted all nodes and haven't found the goal, return an empty path.
-        return new SearchResult(new ArrayList<>(), visitedNodes, name);
+        return new SearchResult(new ArrayList<>(), visitedNodes, getName());
     }
 
     /**
