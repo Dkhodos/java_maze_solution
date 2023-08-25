@@ -55,12 +55,18 @@ public abstract class SearchAlgorithm {
             // Get the node with the highest priority (lowest cost + heuristic) from the frontier.
             Node current = frontier.poll();
 
+            // check if current node was already visited
+            if(visitedNodes.contains(current)){
+                continue;
+            }
+
             // update visited nodes to avoid repetition
             visitedNodes.add(current);
 
             // If the current node is the goal, we've found a solution.
             if (current.equals(goal)) {
                 List<Node> finalPath = path.getReconstructPath();
+                visitedNodes.add(current);
                 return new SearchResult(finalPath, visitedNodes, getName());
             }
 

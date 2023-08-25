@@ -24,7 +24,7 @@ public class UniformCostSearch extends SearchAlgorithm {
     @Override
     public boolean update(Node neighbor,Node current, Map<Node, Integer> costMap, MazePath path) {
         // Calculate the tentative cost to reach the neighbor through the current node.
-        int tentativeCost = costMap.get(current) + 1;
+        int tentativeCost = getCost(current, costMap) + 1;
 
         // If this tentative cost is less than the previously known cost for the neighbor,
         // update the cost and path.
