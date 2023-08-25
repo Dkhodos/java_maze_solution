@@ -7,6 +7,10 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 - Start <img src="static/player.png" width="20px" height="20px" style="position:relative; top: 4px">
 - End <img src="static/goal.png" width="20px" height="20px" style="position:relative; top: 4px">
 
+### Scenarios:
+- for input: `data/maze_scenario_1.txt` output: `outputs/maze_scenario_1.txt`
+- for input: `data/maze_scenario_2.txt` output: `outputs/maze_scenario_2.txt`
+
 ## Features
 
 - **Search Algorithms**: The project includes multiple search algorithms:
