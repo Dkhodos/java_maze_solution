@@ -27,7 +27,7 @@ class GreedySearchTest extends SearchBaseTest{
 
         SearchResult result = greedy.solve(maze, start, goal);
 
-        validateSearchResults(result, 19, 19);
+        validateSearchResults(result, 21, 21);
     }
 
     @Test
@@ -36,7 +36,7 @@ class GreedySearchTest extends SearchBaseTest{
 
         SearchResult result = greedy.solve(maze, start, goal);
 
-        validateSearchResults(result, 397, 1578);
+        validateSearchResults(result, 353, 1706);
     }
 
     @Test

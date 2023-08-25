@@ -7,6 +7,8 @@ import java.util.List;
  */
 public record Maze(int size, Node[][] nodes) {
 
+    private static final int [][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
     /**
      * Retrieves the neighboring nodes of a given node in the maze.
      * This method considers the four cardinal directions (North, East, South, West) as possible neighbors.
@@ -15,28 +17,18 @@ public record Maze(int size, Node[][] nodes) {
      * @return A list of neighboring nodes. If the node is an obstacle, an empty list is returned.
      */
     public List<Node> getNeighbors(Node node) {
-        int x = node.x();
-        int y = node.y();
-
         List<Node> neighbors = new ArrayList<>();
         if (node.isObstacle()) {
             return neighbors;
         }
 
-        if (isInBound(x + 1, y)) {
-            neighbors.add(nodes[x + 1][y]);
-        }
+        for (int[] direction : directions) {
+            int newX = node.x() + direction[0];
+            int newY = node.y() + direction[1];
 
-        if (isInBound(node.x(), y + 1)) {
-            neighbors.add(nodes[node.x()][y + 1]);
-        }
-
-        if (isInBound(x - 1, y)) {
-            neighbors.add(nodes[x - 1][y]);
-        }
-
-        if (isInBound(x, y - 1)) {
-            neighbors.add(nodes[x][y - 1]);
+            if (isInBound(newX, newY)) {
+                neighbors.add(nodes[newX][newY]);
+            }
         }
 
         return neighbors;

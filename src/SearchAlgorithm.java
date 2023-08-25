@@ -66,7 +66,6 @@ public abstract class SearchAlgorithm {
             // If the current node is the goal, we've found a solution.
             if (current.equals(goal)) {
                 List<Node> finalPath = path.getReconstructPath();
-                visitedNodes.add(current);
                 return new SearchResult(finalPath, visitedNodes, getName());
             }
 
