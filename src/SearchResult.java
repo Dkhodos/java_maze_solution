@@ -9,7 +9,7 @@ import java.util.Set;
  * @param visitedNodes The set of nodes that were visited during the search.
  */
 public record SearchResult(List<Node> path, Set<Node> visitedNodes, String name) {
-    private static final String RESULT_TEMPLATE = "(%s, search: %d; path length: %d): ";
+    private static final String RESULT_TEMPLATE = "%s (search %d nodes; path length %d): ";
 
     @Override
     public String toString() {

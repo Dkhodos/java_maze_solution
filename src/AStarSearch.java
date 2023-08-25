@@ -21,10 +21,9 @@ public class AStarSearch extends SearchAlgorithm {
      * @param current The current node.
      * @param costMap The map containing the costs associated with each node.
      * @param path The path being constructed.
-     * @param frontier The nodes yet to be explored.
      */
     @Override
-    public void update(Node neighbor,Node current, Map<Node, Integer> costMap, MazePath path, Frontier frontier) {
+    public boolean update(Node neighbor,Node current, Map<Node, Integer> costMap, MazePath path) {
         // Calculate the tentative cost to reach the neighbor through the current node.
         int tentativeCost = costMap.get(current) + 1;
 
@@ -32,9 +31,10 @@ public class AStarSearch extends SearchAlgorithm {
         // update the cost and path.
         if (tentativeCost < getCost(neighbor, costMap)) {
             costMap.put(neighbor, tentativeCost);
-            path.add(neighbor, current);
-            frontier.add(neighbor);
+            return true;
         }
+
+        return false;
     }
 
     /**

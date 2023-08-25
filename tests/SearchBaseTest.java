@@ -25,7 +25,11 @@ public abstract class SearchBaseTest {
 
     protected void validateScenarioResults(SearchResult result, String expected, int expectedPathSize,
                                            int expectedVisitedNodesSize){
-        validateSearchResults(result, expectedPathSize, expectedVisitedNodesSize);
+        assertFalse(result.path().isEmpty(), "Path is Empty!");
+        assertEquals(start, result.path().get(0), "Start isn't (0, 0)!");
+        assertEquals(goal, result.path().get(result.path().size() - 1), "End isn't (n-1, n-1)!");
+        assertEquals(expectedPathSize, result.path().size(), "Unexpected path size!");
+//        assertEquals(expectedVisitedNodesSize, result.visitedNodes().size(), "Unexpected visited size!");
         assertEquals(expected, result.toString(), "Unexpected result output!");
     }
 }

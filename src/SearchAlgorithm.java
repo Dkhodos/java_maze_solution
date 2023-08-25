@@ -26,7 +26,7 @@ public abstract class SearchAlgorithm {
      * @param path The path being constructed.
      * @param frontier The nodes yet to be explored.
      */
-    protected abstract void update(Node neighbor,Node current, Map<Node, Integer> costMap, MazePath path, Frontier frontier);
+    protected abstract boolean update(Node neighbor,Node current, Map<Node, Integer> costMap, MazePath path);
 
     /**
      * Solves the maze using the implemented search algorithm.
@@ -74,7 +74,11 @@ public abstract class SearchAlgorithm {
 
                 // execute update of  costMap, path and frontier
                 // update will be according to the specific algorithm logic
-                this.update(neighbor, current, costMap, path, frontier);
+                if(this.update(neighbor, current, costMap, path)){
+                    path.add(neighbor, current);
+                    frontier.add(neighbor);
+                    visitedNodes.add(neighbor);
+                }
             }
         }
 

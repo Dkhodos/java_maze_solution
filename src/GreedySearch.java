@@ -23,10 +23,8 @@ public class GreedySearch extends SearchAlgorithm {
      * @param frontier The nodes yet to be explored.
      */
     @Override
-    public void update(Node neighbor,Node current, Map<Node, Integer> costMap, MazePath path, Frontier frontier) {
-        // Update the path to include the current node as the predecessor of the neighbor.
-        path.add(neighbor, current);
-        frontier.add(neighbor);
+    public boolean update(Node neighbor,Node current, Map<Node, Integer> costMap, MazePath path) {
+        return true;
     }
 
     /**
