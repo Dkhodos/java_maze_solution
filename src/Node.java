@@ -12,7 +12,6 @@ public record Node(int x, int y, boolean isObstacle) {
      *
      * @return A string representing the node's coordinates.
      */
-
     @Override
     public String toString() {
         return String.format("(%d,%d)", x + 1, y + 1);

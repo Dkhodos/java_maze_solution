@@ -11,6 +11,31 @@ public class AStarSearch extends SearchAlgorithm {
         return "Astar";
     }
 
+    /**
+     * Solves the maze using the A* search algorithm.
+     * <p>
+     * A* search is an informed search algorithm that finds the path from a start node to a goal node
+     * with the shortest possible cost. It does this by maintaining a priority queue of nodes to explore,
+     * where the priority is determined by the sum of the cost to reach a node and a heuristic estimate
+     * of the cost from that node to the goal.
+     * <p>
+     * The algorithm starts with the start node and explores its neighbors. For each neighbor, it calculates
+     * a tentative cost to reach that neighbor through the current node. If this tentative cost is less than
+     * any previously known cost for that neighbor, the neighbor's cost is updated, and the neighbor is added
+     * to the priority queue for further exploration.
+     * <p>
+     * The algorithm continues exploring nodes from the priority queue until it finds the goal node or until
+     * there are no more nodes left to explore.
+     *
+     * @param maze The maze to be solved. This provides information about the layout of the maze, including
+     *             which cells are walkable and which are obstacles.
+     * @param start The starting node. This is where the search begins.
+     * @param goal The goal node. This is the destination the search is trying to reach.
+     *
+     * @return SearchResult object containing the path from the start node to the goal node (if found),
+     *         and the set of all nodes that were visited during the search. If no path is found, the path
+     *         in the SearchResult will be empty.
+     */
     public SearchResult solve(Maze maze, Node start, Node goal) {
         // Initialize the cost map and the set of visited nodes.
         Map<Node, Integer> costMap = new HashMap<>();

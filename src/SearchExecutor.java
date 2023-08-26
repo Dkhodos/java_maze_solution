@@ -56,7 +56,9 @@ public class SearchExecutor {
         try {
             writer = new PrintWriter("outputs/"+ fileName, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.error("Failed to open file, no output will be printed to file");
+            e.printStackTrace();
+            return;
         }
 
         writer.print(output);

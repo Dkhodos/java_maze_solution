@@ -45,7 +45,7 @@ public class ReportMaker {
 
             logger.info("Report written to " + reportFile);
         } catch(IOException e) {
-            logger.error("Error creating report: " + e.getMessage());
+            logger.error("Error creating HTML report: " + e.getMessage());
             e.printStackTrace();
         }
     }

@@ -10,6 +10,31 @@ public class UniformCostSearch extends SearchAlgorithm {
         return "UCS";
     }
 
+    /**
+     * Solves the maze using the Uniform Cost Search (UCS) algorithm.
+     * <p>
+     * Uniform Cost Search is an uninformed search algorithm that selects the path with the lowest cost
+     * from the start node to the current node. Unlike Greedy Search or A* search, UCS does not use any
+     * heuristic to estimate the cost from the current node to the goal. Instead, it only considers the
+     * actual cost to reach a node.
+     * <p>
+     * The algorithm starts with the start node and explores its neighbors. For each neighbor, it calculates
+     * the cost to reach that neighbor through the current node. The node with the lowest cost is then chosen
+     * for further exploration. This process continues until the goal node is found or there are no more nodes
+     * left to explore.
+     * <p>
+     * The algorithm uses a priority queue to keep track of nodes to explore, where the priority is determined
+     * by the cost to reach a node. It also maintains a set of visited nodes to ensure that nodes are not revisited.
+     *
+     * @param maze The maze to be solved. This provides information about the layout of the maze, including
+     *             which cells are walkable and which are obstacles.
+     * @param start The starting node. This is where the search begins.
+     * @param goal The goal node. This is the destination the search is trying to reach.
+     *
+     * @return SearchResult object containing the path from the start node to the goal node (if found),
+     *         and the set of all nodes that were visited during the search. If no path is found, the path
+     *         in the SearchResult will be empty.
+     */
     public SearchResult solve(Maze maze, Node start, Node goal) {
         // Initialize the cost map and the set of visited nodes.
         Map<Node, Integer> costMap = new HashMap<>();

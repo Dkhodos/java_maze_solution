@@ -17,6 +17,7 @@ public class Main {
             System.exit(1);
         }
 
+        // extract file patch for args
         String filePath = args[0];
 
         // Parse the maze from the provided file.

@@ -90,6 +90,7 @@ This project provides a set of search algorithms to solve a maze. The maze is re
   - `testGetReconstructPathDataExists`: Checks the correct reconstruction of the path when data exists.
   - `testGetReconstructPathEmpty`: Validates the behavior when trying to reconstruct a path with no data.
   - `testGetReconstructPathSorted`: Ensures the reconstructed path is correctly sorted.
+
 - **FrontierTest**:
   - `testIsEmpty`: Validates the behavior of the isEmpty method.
   - `testDequeue`: Checks the correct dequeue operation and order.
