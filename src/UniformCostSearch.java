@@ -10,29 +10,62 @@ public class UniformCostSearch extends SearchAlgorithm {
         return "UCS";
     }
 
-    /**
-     * Updates the cost, path, and frontier for the Uniform Cost Search algorithm.
-     * The cost to reach the neighbor through the current node is calculated.
-     * If this tentative cost is less than the previously known cost for the neighbor,
-     * the cost and path are updated.
-     *
-     * @param neighbor The neighboring node.
-     * @param current The current node.
-     * @param costMap The map containing the costs associated with each node.
-     * @param path The path being constructed.
-     */
-    @Override
-    public boolean update(Node neighbor,Node current, Map<Node, Integer> costMap, MazePath path) {
-        // Calculate the tentative cost to reach the neighbor through the current node.
-        int tentativeCost = getCost(current, costMap) + 1;
+    public SearchResult solve(Maze maze, Node start, Node goal) {
+        // Initialize the cost map and the set of visited nodes.
+        Map<Node, Integer> costMap = new HashMap<>();
+        Set<Node> visitedNodes = new HashSet<>();
 
-        // If this tentative cost is less than the previously known cost for the neighbor,
-        // update the cost and path.
-        if (tentativeCost < getCost(neighbor, costMap)) {
-            costMap.put(neighbor, tentativeCost);
-            return true;
+        // Initialize the frontier with a comparator that prioritizes nodes based on A* criteria.
+        PriorityQueue<Node> frontier = new PriorityQueue<>(Comparator.comparingDouble((Node n) -> this.comparator(n, costMap)));
+
+        // This map will be used to backtrack from the goal to the start to reconstruct the path.
+        MazePath path = new MazePath(goal);
+
+        // Set the starting node's cost to 0 and add it to the frontier.
+        costMap.put(start, 0);
+        frontier.add(start);
+
+        // Continue searching as long as there are nodes to explore.
+        while (!frontier.isEmpty()) {
+            // Get the node with the highest priority (lowest cost) from the frontier.
+            Node current = frontier.poll();
+
+            // check if current node was already visited
+            if(visitedNodes.contains(current)){
+                continue;
+            }
+
+            // update visited nodes to avoid repetition
+            visitedNodes.add(current);
+
+            // If the current node is the goal, we've found a solution.
+            if (current.equals(goal)) {
+                List<Node> finalPath = path.getReconstructPath();
+                return new SearchResult(finalPath, visitedNodes, getName());
+            }
+
+            // Explore the neighbors of the current node.
+            for (Node neighbor : maze.getNeighbors(current)) {
+                // If the neighbor has already been visited, skip it.
+                if (visitedNodes.contains(neighbor)) {
+                    continue;
+                }
+
+                // Calculate the tentative cost to reach the neighbor through the current node.
+                int tentativeCost = getCost(current, costMap) + 1;
+
+                // If this tentative cost is less than the previously known cost for the neighbor,
+                // update the cost and path.
+                if (tentativeCost < getCost(neighbor, costMap)) {
+                    costMap.put(neighbor, tentativeCost);
+                    path.add(neighbor, current);
+                    frontier.add(neighbor);
+                }
+            }
         }
-        return false;
+
+        // If we've exhausted all nodes and haven't found the goal, return an empty path.
+        return new SearchResult(new ArrayList<>(), visitedNodes, getName());
     }
 
     /**
@@ -40,11 +73,10 @@ public class UniformCostSearch extends SearchAlgorithm {
      * Only the cost to reach the node is considered, without any heuristic.
      *
      * @param node The node to be compared.
-     * @param goal The goal node (not used in this comparison, but present due to method signature).
      * @param costMap The map containing the costs associated with each node.
      * @return An integer representing the cost associated with the given node.
      */
-    protected double comparator(Node node, Node goal, Map<Node, Integer> costMap){
+    protected double comparator(Node node, Map<Node, Integer> costMap){
         return this.getCost(node, costMap);
     }
 }

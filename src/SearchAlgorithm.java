@@ -8,26 +8,6 @@ public abstract class SearchAlgorithm {
     public abstract String getName();
 
     /**
-     * Compares two nodes based on their cost and heuristic values.
-     *
-     * @param node The node to be compared.
-     * @param goal The goal node.
-     * @param costMap The map containing the costs associated with each node.
-     * @return An integer representing the comparison result.
-     */
-    protected abstract double comparator(Node node, Node goal, Map<Node, Integer> costMap);
-
-    /**
-     * Updates the cost, path, and frontier based on the current node and its neighbor.
-     *
-     * @param neighbor The neighboring node.
-     * @param current The current node.
-     * @param costMap The map containing the costs associated with each node.
-     * @param path The path being constructed.
-     */
-    protected abstract boolean update(Node neighbor,Node current, Map<Node, Integer> costMap, MazePath path);
-
-    /**
      * Solves the maze using the implemented search algorithm.
      *
      * @param maze The maze to be solved.
@@ -35,59 +15,7 @@ public abstract class SearchAlgorithm {
      * @param goal The goal node.
      * @return The result of the search, containing the path and visited nodes.
      */
-    public SearchResult solve(Maze maze, Node start, Node goal) {
-        // Initialize the cost map and the set of visited nodes.
-        Map<Node, Integer> costMap = new HashMap<>();
-        Set<Node> visitedNodes = new HashSet<>();
-
-        // Initialize the frontier with a comparator that prioritizes nodes based on A* criteria.
-        PriorityQueue<Node> frontier = new PriorityQueue<>(Comparator.comparingDouble((Node n) -> this.comparator(n ,goal, costMap)));
-
-        // This map will be used to backtrack from the goal to the start to reconstruct the path.
-        MazePath path = new MazePath(goal);
-
-        // Set the starting node's cost to 0 and add it to the frontier.
-        costMap.put(start, 0);
-        frontier.add(start);
-
-        // Continue searching as long as there are nodes to explore.
-        while (!frontier.isEmpty()) {
-            // Get the node with the highest priority (lowest cost + heuristic) from the frontier.
-            Node current = frontier.poll();
-
-            // check if current node was already visited
-            if(visitedNodes.contains(current)){
-                continue;
-            }
-
-            // update visited nodes to avoid repetition
-            visitedNodes.add(current);
-
-            // If the current node is the goal, we've found a solution.
-            if (current.equals(goal)) {
-                List<Node> finalPath = path.getReconstructPath();
-                return new SearchResult(finalPath, visitedNodes, getName());
-            }
-
-            // Explore the neighbors of the current node.
-            for (Node neighbor : maze.getNeighbors(current)) {
-                // If the neighbor has already been visited, skip it.
-                if (visitedNodes.contains(neighbor)) {
-                    continue;
-                }
-
-                // execute update of  costMap, path and frontier
-                // update will be according to the specific algorithm logic
-                if(this.update(neighbor, current, costMap, path)){
-                    path.add(neighbor, current);
-                    frontier.add(neighbor);
-                }
-            }
-        }
-
-        // If we've exhausted all nodes and haven't found the goal, return an empty path.
-        return new SearchResult(new ArrayList<>(), visitedNodes, getName());
-    }
+    public abstract SearchResult solve(Maze maze, Node start, Node goal);
 
     /**
      * Retrieves the cost associated with a given node from the cost map.

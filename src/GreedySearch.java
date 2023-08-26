@@ -10,20 +10,57 @@ public class GreedySearch extends SearchAlgorithm {
         return "Greedy";
     }
 
+    public SearchResult solve(Maze maze, Node start, Node goal) {
+        // Initialize the cost map and the set of visited nodes.
+        Set<Node> visitedNodes = new HashSet<>();
 
-    /**
-     * Updates the path for the Greedy Search algorithm.
-     * The path is updated to include the current node as the predecessor of the neighbor.
-     * The cost is not considered in the Greedy Search update.
-     *
-     * @param neighbor The neighboring node.
-     * @param current The current node.
-     * @param costMap The map containing the costs associated with each node (not used in this update, but present due to method signature).
-     * @param path The path being constructed.
-     */
-    @Override
-    public boolean update(Node neighbor,Node current, Map<Node, Integer> costMap, MazePath path) {
-        return true;
+        // Initialize the frontier with a comparator that prioritizes nodes based on A* criteria.
+        PriorityQueue<Node> frontier = new PriorityQueue<>(Comparator.comparingDouble((Node n) -> this.comparator(n, goal)));
+
+        // This map will be used to backtrack from the goal to the start to reconstruct the path.
+        MazePath path = new MazePath(goal);
+
+        // Set the starting node's cost to 0 and add it to the frontier.
+        frontier.add(start);
+
+        // count the actual amount of searches performed
+        int searches = 0;
+
+        // Continue searching as long as there are nodes to explore.
+        while (!frontier.isEmpty()) {
+            // Get the node with the highest priority (heuristic) from the frontier.
+            Node current = frontier.poll();
+
+            // check if current node was already visited
+            if (visitedNodes.contains(current)) {
+                continue;
+            }
+
+            // update visited nodes to avoid repetition
+            visitedNodes.add(current);
+
+            // If the current node is the goal, we've found a solution.
+            if (current.equals(goal)) {
+                List<Node> finalPath = path.getReconstructPath();
+                System.out.println(searches);
+                return new SearchResult(finalPath, visitedNodes, getName());
+            }
+
+            // Explore the neighbors of the current node.
+            for (Node neighbor : maze.getNeighbors(current)) {
+                searches += 1;
+
+                // If the neighbor has already been visited, skip it.
+                if (visitedNodes.contains(neighbor) || frontier.contains(neighbor)) {
+                    continue;
+                }
+
+                path.add(neighbor, current);
+                frontier.add(neighbor);
+            }
+        }
+
+        return new SearchResult(new ArrayList<>(), visitedNodes, getName());
     }
 
     /**
@@ -32,11 +69,9 @@ public class GreedySearch extends SearchAlgorithm {
      *
      * @param node The node from which the heuristic distance is to be calculated.
      * @param goal The goal node to which the heuristic distance is to be calculated.
-     * @param costMap The map containing the costs associated with each node (not used in this comparison, but present due to method signature).
      * @return An integer representing the heuristic distance between the given node and the goal node.
      */
-    @Override
-    protected double comparator(Node node, Node goal, Map<Node, Integer> costMap){
+    protected double comparator(Node node, Node goal){
         return this.getHeuristicDistance(node, goal);
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
  */
 public record Maze(int size, Node[][] nodes) {
 
-    private static final int [][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    private static final int [][] directions = {{1, 0}, {0, -1}, {-1, 0}, {0, 1}};
 
     /**
      * Retrieves the neighboring nodes of a given node in the maze.
