@@ -23,9 +23,6 @@ public class GreedySearch extends SearchAlgorithm {
         // Set the starting node's cost to 0 and add it to the frontier.
         frontier.add(start);
 
-        // count the actual amount of searches performed
-        int searches = 0;
-
         // Continue searching as long as there are nodes to explore.
         while (!frontier.isEmpty()) {
             // Get the node with the highest priority (heuristic) from the frontier.
@@ -42,14 +39,11 @@ public class GreedySearch extends SearchAlgorithm {
             // If the current node is the goal, we've found a solution.
             if (current.equals(goal)) {
                 List<Node> finalPath = path.getReconstructPath();
-                System.out.println(searches);
                 return new SearchResult(finalPath, visitedNodes, getName());
             }
 
             // Explore the neighbors of the current node.
             for (Node neighbor : maze.getNeighbors(current)) {
-                searches += 1;
-
                 // If the neighbor has already been visited, skip it.
                 if (visitedNodes.contains(neighbor) || frontier.contains(neighbor)) {
                     continue;
