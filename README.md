@@ -80,15 +80,15 @@ This project provides a set of search algorithms to solve a maze. The maze is re
     .\compile_and_run.ps1 data/maze_scenario_3.txt
   ```
   #### Main Program Flow:
-  - program excepts a single path to a file
-    - if nothing is provided, you will get a usage print.
-  - program will open the provided file.
-    - if file doesn't exist you will get and error.
-    - if file is invalid you will get and error.
-  - program will run all 3 algorithms.
-  - program will print to standard input the logs and results.
-  - program will create normalized `<filename>.txt` output file in `outputs` with results only.
-  - program will generate an HTML report file for each algorithm:
+  - Program excepts a single path to a file
+    - If nothing is provided, you will get a usage print.
+  - Program will open the provided file.
+    - If file doesn't exist you will get and error.
+    - If file is invalid you will get and error.
+  - Program will run all 3 algorithms.
+  - Program will print to standard input the logs and results.
+  - Program will create normalized `<filename>.txt` output file in `outputs` with results only.
+  - Program will generate an HTML report file for each algorithm:
     - `reports/report.Astar.html`
     - `reports/report.Greedy.html`
     - `reports/report.UCS.html`
