@@ -3,15 +3,15 @@
 This project provides a set of search algorithms to solve a maze. The maze is represented as a grid, where each cell can either be a walkable path or an obstacle. The goal is to find a path from a starting point to an end point.
 ![Maze](static/maze.png)
 
-## Targets
-- Start <img src="static/player.png" width="20px" height="20px" style="position:relative; top: 4px">
-- End <img src="static/goal.png" width="20px" height="20px" style="position:relative; top: 4px">
+## Rules
+- Rules and instructions are specified in this [assignment](static/maze_assigment.pdf).
 
-### Scenarios:
-- for input: `data/maze_scenario_1.txt` output: `outputs/maze_scenario_1.txt`
-- for input: `data/maze_scenario_2.txt` output: `outputs/maze_scenario_2.txt`
+## Scenarios:
+- for input: `data/maze_scenario_1.txt` output: `outputs/maze_scenario_1.txt` (5X5)
+- for input: `data/maze_scenario_2.txt` output: `outputs/maze_scenario_2.txt` (10X10)
+- for input: `data/maze_scenario_3.txt` output: `outputs/maze_scenario_3.txt` (30X30)
 
-### Project Structure:
+## Project Structure:
 - 📁 **.github** - GitHub actions for automatic test (CI).
 - 📁 **.idea** - IntelliJ project files
 - 📁 **data** - possible inputs for the Main program.
@@ -46,55 +46,90 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 - **SearchExecutor**: Executes search algorithms and generates reports.
 - **SearchResult**: Holds the result of a search algorithm.
 - **MazeGenerator**: Generates random mazes.
-
-## Install Dependencies
-- Dependencies are located in `java_maze_solution.iml`.
-- Install using your local IDE package manager.
+- **Main**: The actual extraction class, to run the program.
 
 ## Usage
 
 ### Main Program
-- Run main with `java Main.java <absolute_path_to_maze_file | relative_path_to_maze_file>`.
-- Example `java Main.java data/maze1.txt`.
-  ![IntelliJ Runner](static/run.png)
+- program expects a path (relative ot absolute) to a NxN maze file as in the assign task.
+
+  #### In Intelij IDE
+- click the green run arrow in `Main.java` with this config:
+  ![IntelliJ Runner](static/run_intelij.png)
+
+  #### In shell (mac/ linux)
+  - Run: 
+  ```shell
+    chmod +x compile_and_run.sh
+  ```
+  - Run:
+  ```shell
+    ./compile_and_run.sh <path-to-maze-file>
+  ```
+  - Example with `data/maze_scenario_3.txt`:
+  ```shell
+    ./compile_and_run.sh data/maze_scenario_3.txt
+  ```
+  #### In powershell (windows)
+  - Run:
+  ```shell
+    .\compile_and_run.ps1 <path-to-maze-file>
+  ```
+  - Example with `data/maze_scenario_3.txt`:
+  ```shell
+    .\compile_and_run.ps1 data/maze_scenario_3.txt
+  ```
+  #### Main Program Flow:
+  - program excepts a single path to a file
+    - if nothing is provided, you will get a usage print.
+  - program will open the provided file.
+    - if file doesn't exist you will get and error.
+    - if file is invalid you will get and error.
+  - program will run all 3 algorithms.
+  - program will print to standard input the logs and results.
+  - program will create normalized `<filename>.txt` output file in `outputs` with results only.
+  - program will generate an HTML report file for each algorithm:
+    - `reports/report.Astar.html`
+    - `reports/report.Greedy.html`
+    - `reports/report.UCS.html`
 
 ### Maze Generator (tests/MazeGenerator.java)
 - Run main in `java MazeGenerator.java`, you may adjust the size and difficulty in the main method.
 
 ## Tests
-- **AStarTest**:
+### Install Dependencies (IntelliJ)
+- Dependencies are located in `java_maze_solution.iml`.
+- Install using your local IDE package manager.
+
+### **AStarTest**:
   - `testSolve`: Checks if the A* algorithm can solve a basic maze.
   - `testSolveUnsolvableMaze`: Validates that the A* algorithm correctly identifies an unsolvable maze.
   - `testSolveBigMaze`: Tests the A* algorithm's performance and correctness on a larger maze.
 
-- **GreedySearchTest**:
-  - `testSolve`: Checks if the Greedy algorithm can solve a basic maze.
-  - `testSolveUnsolvableMaze`: Validates that the Greedy algorithm correctly identifies an unsolvable maze.
-  - `testSolveBigMaze`: Tests the Greedy algorithm's performance and correctness on a larger maze.
+### **GreedySearchTest**:
+- `testSolve`: Checks if the Greedy algorithm can solve a basic maze.
+- `testSolveUnsolvableMaze`: Validates that the Greedy algorithm correctly identifies an unsolvable maze.
+- `testSolveBigMaze`: Tests the Greedy algorithm's performance and correctness on a larger maze.
 
-- **UniformCostSearchTest**:
-  - `testSolve`: Checks if the Uniform Cost Search algorithm can solve a basic maze.
-  - `testSolveUnsolvableMaze`: Validates that the Uniform Cost Search algorithm correctly identifies an unsolvable maze.
-  - `testSolveBigMaze`: Tests the Uniform Cost Search algorithm's performance and correctness on a larger maze.
+### **UniformCostSearchTest**:
+- `testSolve`: Checks if the Uniform Cost Search algorithm can solve a basic maze.
+- `testSolveUnsolvableMaze`: Validates that the Uniform Cost Search algorithm correctly identifies an unsolvable maze.
+- `testSolveBigMaze`: Tests the Uniform Cost Search algorithm's performance and correctness on a larger maze.
 
-- **MazeParserTest**:
-  - `testParseMaze`: Validates that the maze parser correctly reads and interprets a maze file.
-  - `testEmptyFile`: Checks the parser's behavior when provided with an empty file.
-  - `testSizeMissingFile`: Validates the parser's behavior when the maze size is missing from the file.
+### **MazeParserTest**:
+- `testParseMaze`: Validates that the maze parser correctly reads and interprets a maze file.
+- `testEmptyFile`: Checks the parser's behavior when provided with an empty file.
+- `testSizeMissingFile`: Validates the parser's behavior when the maze size is missing from the file.
 
-- **MazeTest**:
-  - `testGetNeighbors`: Checks if the maze correctly identifies the neighbors of a given node, considering obstacles.
+### **MazeTest**:
+- `testGetNeighbors`: Checks if the maze correctly identifies the neighbors of a given node, considering obstacles.
 
-- **MazePathTest**:
-  - `testAdd`: Validates the addition of nodes and their predecessors to the path.
-  - `testGetReconstructPathDataExists`: Checks the correct reconstruction of the path when data exists.
-  - `testGetReconstructPathEmpty`: Validates the behavior when trying to reconstruct a path with no data.
-  - `testGetReconstructPathSorted`: Ensures the reconstructed path is correctly sorted.
+### **MazePathTest**:
+- `testAdd`: Validates the addition of nodes and their predecessors to the path.
+- `testGetReconstructPathDataExists`: Checks the correct reconstruction of the path when data exists.
+- `testGetReconstructPathEmpty`: Validates the behavior when trying to reconstruct a path with no data.
+- `testGetReconstructPathSorted`: Ensures the reconstructed path is correctly sorted.
 
-- **FrontierTest**:
-  - `testIsEmpty`: Validates the behavior of the isEmpty method.
-  - `testDequeue`: Checks the correct dequeue operation and order.
-  - `testRemove`: Validates the removal of specific nodes from the frontier.
 
 ### To run the tests:
 
@@ -104,6 +139,4 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 - Check `.github/workflows/tests.yaml`.
 
 ## Notes
-- The maze file should start with a number indicating the size of the maze, followed by the maze grid where `0` represents a walkable path and `1` represents an obstacle.
-- The reports are generated as HTML files and can be viewed in a web browser.
 - This project is using the **Record** keyword which were introduced in `Java 14`: https://www.baeldung.com/java-record-keyword
