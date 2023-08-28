@@ -57,6 +57,11 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 - Click the green run arrow in `src/Main.java` with this config:
   ![IntelliJ Runner](static/run_intelij.png)
 
+  #### In Eclipse IDE
+- Click the green run arrow and choose "Run Configurations"
+- Inside the argumuments tab, add the following config:
+  ![Eclipse Runner](static/run_eclipse.png)
+
   #### In shell (mac/ linux)
   - Run: 
   ```shell
