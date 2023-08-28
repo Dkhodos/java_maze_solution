@@ -51,10 +51,10 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 ## Usage
 
 ### Main Program
-- program expects a path (relative ot absolute) to a NxN maze file as in the assign task.
+- Program expects a path (relative ot absolute) to a NxN maze file as in the assign task.
 
   #### In Intelij IDE
-- click the green run arrow in `Main.java` with this config:
+- Click the green run arrow in `src/Main.java` with this config:
   ![IntelliJ Runner](static/run_intelij.png)
 
   #### In shell (mac/ linux)
@@ -101,30 +101,30 @@ This project provides a set of search algorithms to solve a maze. The maze is re
 - Dependencies are located in `java_maze_solution.iml`.
 - Install using your local IDE package manager.
 
-### **AStarTest**:
+### AStarTest:
   - `testSolve`: Checks if the A* algorithm can solve a basic maze.
   - `testSolveUnsolvableMaze`: Validates that the A* algorithm correctly identifies an unsolvable maze.
   - `testSolveBigMaze`: Tests the A* algorithm's performance and correctness on a larger maze.
 
-### **GreedySearchTest**:
+### GreedySearchTest:
 - `testSolve`: Checks if the Greedy algorithm can solve a basic maze.
 - `testSolveUnsolvableMaze`: Validates that the Greedy algorithm correctly identifies an unsolvable maze.
 - `testSolveBigMaze`: Tests the Greedy algorithm's performance and correctness on a larger maze.
 
-### **UniformCostSearchTest**:
+### UniformCostSearchTest:
 - `testSolve`: Checks if the Uniform Cost Search algorithm can solve a basic maze.
 - `testSolveUnsolvableMaze`: Validates that the Uniform Cost Search algorithm correctly identifies an unsolvable maze.
 - `testSolveBigMaze`: Tests the Uniform Cost Search algorithm's performance and correctness on a larger maze.
 
-### **MazeParserTest**:
+### MazeParserTest:
 - `testParseMaze`: Validates that the maze parser correctly reads and interprets a maze file.
 - `testEmptyFile`: Checks the parser's behavior when provided with an empty file.
 - `testSizeMissingFile`: Validates the parser's behavior when the maze size is missing from the file.
 
-### **MazeTest**:
+### MazeTest:
 - `testGetNeighbors`: Checks if the maze correctly identifies the neighbors of a given node, considering obstacles.
 
-### **MazePathTest**:
+### MazePathTest:
 - `testAdd`: Validates the addition of nodes and their predecessors to the path.
 - `testGetReconstructPathDataExists`: Checks the correct reconstruction of the path when data exists.
 - `testGetReconstructPathEmpty`: Validates the behavior when trying to reconstruct a path with no data.
